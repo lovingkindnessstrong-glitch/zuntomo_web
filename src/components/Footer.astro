@@ -1,0 +1,43 @@
+---
+const links = [
+  { href: '/', label: 'ホーム' },
+  { href: '/kids/', label: 'キッズクラス' },
+  { href: '/about/', label: '運営者情報' },
+  { href: '/news/', label: '活動報告' },
+  { href: '/library/', label: 'レッスン動画' },
+];
+---
+
+<footer class="bg-[#1E2A44] text-white">
+  <div class="mx-auto max-w-6xl px-6 py-14 sm:px-8">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="min-w-0 flex-1">
+        <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-teal-300" fill="none" aria-hidden="true">
+            <path d="M6 9l6-6 6 6M6 15l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          サイトリンク
+        </p>
+        <p class="mt-4 max-w-xl text-sm leading-6 text-slate-200">
+          静岡県東部（沼津・三島・函南周辺）で活動するZUMBA®・ダンスサークル「ズンとも」の各種ご案内です。運動が苦手な方も大歓迎！一緒に楽しく汗を流しましょう。
+        </p>
+      </div>
+
+      <div class="grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {links.map(({ href, label }) => (
+          <a
+            class="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-100 transition hover:border-white/30 hover:bg-white/10"
+            href={href}
+          >
+            <span class="block font-semibold">{label}</span>
+            <span class="mt-1 block text-xs text-slate-300">{href}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-12 border-t border-white/15 pt-6 text-center text-sm text-slate-300">
+      © ダンスサークル「ズンとも」
+    </div>
+  </div>
+</footer>
