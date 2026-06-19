@@ -58,3 +58,11 @@ Leverage "かんなみ猫おどり" (Kannami Cat Dance Festival) as a powerful l
 - **`/library/` (Lesson Videos):** Archive practice footage, choreography videos, and performance clips. Drive organic discovery through video search results, linking viewers back to circle awareness and enrollment CTAs.
   
 - **`/` (Top Page - Adult ZUMBA Hub):** Maintain brand focus on Adult ZUMBA by keeping "かんなみ猫おどり" mentions light and supporting. Reference only as "key event" without overemphasis to preserve primary SEO positioning.
+
+## 8. Technology Stack & Migration Rules
+- **Framework:** Astro (Static Site Generation).
+- **Migration Strategy:** Strictly preserve and repurpose existing HTML structures and CSS variables. The AI agent must NOT alter the established design system, color codes, or CSS classes during the Astro component conversion unless explicitly instructed.
+
+## 9. AI Development Protocol (For Cline/Gemini)
+- **SSOT Compliance:** The AI agent must read and adhere to this `projet_guidlines.md` before executing any file modifications or creating new routes.
+- **Safety & Diff:** Prioritize non-destructive edits. When migrating existing assets to Astro, maintain the exact visual output.q
