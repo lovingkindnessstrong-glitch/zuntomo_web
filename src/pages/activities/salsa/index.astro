@@ -1,0 +1,164 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { label: 'ホーム', href: '/' },
+  { label: 'レッスン', href: '/#lesson' },
+  { label: 'サルサ・バチャータ' },
+];
+---
+
+<Layout title="サルサ・バチャータ | ZUNTOMO">
+  <main class="bg-gradient-to-b from-orange-50 to-white">
+    
+    {/* ① ヒーローエリア */}
+    <section class="relative w-full h-96 bg-gradient-to-r from-red-500 to-orange-600 flex flex-col items-center justify-center text-center px-4">
+      <div class="absolute inset-0 bg-orange-600 opacity-75"></div>
+      <div class="relative z-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+          （水曜）無料でペアダンスの練習し放題！！
+        </h1>
+        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-md">
+          （土曜）ソーシャルに出る前のなんちゃってパーティ。食べて飲んで気楽にペアダンス
+        </p>
+      </div>
+    </section>
+
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+      
+      {/* ② コンセプト・ストーリー */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-red-400 pb-3 mb-6">
+          💃 初心者による、初心者のための「安全なペアダンス教習所」
+        </h2>
+        <div class="bg-orange-50 rounded-lg p-6 shadow-md">
+          <p class="text-gray-800 text-lg leading-relaxed mb-4">
+            代表自身が初めてサルサソーシャルに参加した際、右も左も分からず苦い経験をしたことが原点です。
+          </p>
+          <p class="text-gray-800 text-lg leading-relaxed mb-4">
+            近隣ではレッスン料が高額なため、初心者同士が「ソーシャル（公道）に出る前の安全な教習所コース」として気兼ねなく練習できる場所を作りました。
+          </p>
+          <p class="text-gray-800 text-lg leading-relaxed">
+            先生はいません！失敗を恐れず、思う存分練習できます。完全に趣味の集まりとして、手作りのお料理とお酒を楽しみながら、優しい仲間たちとゆっくり踊れる空間です。
+          </p>
+        </div>
+      </section>
+
+      {/* ③ スケジュールと参加案内 */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-red-400 pb-3 mb-6">
+          🎯 練習会 ＆ 月1パーティ 詳細
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* カード1: 水曜日 無料練習会 */}
+          <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500 hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-red-700 mb-4">💃 ZUNTOMOサルサ・バチャータ無料練習会</h3>
+            
+            <div class="space-y-3 mb-4">
+              <p class="text-gray-800"><strong class="text-gray-900">📅 開催日時:</strong></p>
+              <p class="text-xl font-bold text-red-600">水曜日 20:40〜21:20（40分）</p>
+              <div class="bg-red-50 border-l-4 border-red-500 text-red-800 p-3 rounded">
+                <p class="font-bold text-lg">⚠️ 夏季休講：7月・8月はお休みです</p>
+              </div>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">📍 会場:</strong></p>
+              <p class="text-gray-800">函南町西部コミュニティセンター 多目的ルーム</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">💰 料金:</strong></p>
+              <p class="text-2xl font-bold text-green-600">0円（無料）</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">🎫 参加方法:</strong></p>
+              <p class="text-gray-800">事前予約不要。直接現地にお越しください。</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+              <span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">SALSA</span>
+              <span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">BACHATA</span>
+              <span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">無料</span>
+              <span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">どなたでも参加可能</span>
+              <span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ペアダンス</span>
+            </div>
+          </div>
+
+          {/* カード2: 土曜日 パーティ */}
+          <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-orange-500 hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-orange-700 mb-4">🕺 ZUNTOMOサルサパーティ</h3>
+            
+            <div class="space-y-3 mb-4">
+              <p class="text-gray-800"><strong class="text-gray-900">📅 開催日時:</strong></p>
+              <p class="text-xl font-bold text-orange-600">土曜日 19:00〜22:00（180分）</p>
+              <p class="text-gray-700">※月1回開催</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">📍 会場:</strong></p>
+              <p class="text-gray-800">三浦ダンススタジオ（沼津市）2F 大ホール</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">💰 料金:</strong></p>
+              <p class="text-2xl font-bold text-orange-600">2,000円</p>
+              <p class="text-sm text-gray-700">送迎、アルコール飲み放題、手作り料理食べ放題、スタジオ使用料すべて込み</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">🎫 参加方法:</strong></p>
+              <p class="text-gray-800">事前予約不要ですが、送迎とお料理の準備があるため、事前にご連絡いただけるとスムーズです。</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">SALSA</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">BACHATA</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">月1回</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">どなたでも参加可能</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">飲み放題</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">食べ放題</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ペアダンス</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ④ 特徴セクション */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-red-400 pb-3 mb-6">
+          ✨ ZUNTOMOサルサの3つの特徴
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-lg p-6 shadow-md border-t-4 border-red-500">
+            <div class="text-5xl mb-4 text-center">🎓</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">安全な教習所</h3>
+            <p class="text-gray-800 text-center">
+              初心者による、初心者のための場所。失敗を恐れず、思う存分練習できます。
+            </p>
+          </div>
+          <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-lg p-6 shadow-md border-t-4 border-orange-500">
+            <div class="text-5xl mb-4 text-center">🍴</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">手作り料理とお酒</h3>
+            <p class="text-gray-800 text-center">
+              完全に趣味の集まりとして、美味しいお料理とお酒を楽しみながら踊れます。
+            </p>
+          </div>
+          <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-lg p-6 shadow-md border-t-4 border-yellow-500">
+            <div class="text-5xl mb-4 text-center">👫</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">優しい仲間たち</h3>
+            <p class="text-gray-800 text-center">
+              先生はいません！優しい仲間たちとゆっくり踊れるアットホームな空間です。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CVエリア */}
+      <section class="bg-gradient-to-r from-red-400 via-orange-400 to-red-400 rounded-lg p-8 text-center shadow-xl">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          まずは無料練習会で、一緒に踊りませんか？
+        </h2>
+        <p class="text-white text-lg mb-6">
+          どんな小さな疑問も公式LINEで受付中！インストラクターが直接丁寧にお答えします。
+        </p>
+        <Button href="#" text="LINEで今すぐ相談・体験申込" style="primary" />
+      </section>
+
+    </div>
+  </main>
+</Layout>

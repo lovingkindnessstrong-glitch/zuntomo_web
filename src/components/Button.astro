@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string;
+  text: string;
+  style?: 'primary' | 'secondary' | 'outline';
+}
+
+const { href, text, style = "primary" } = Astro.props;
+
+const baseClasses = "inline-block font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105";
+
+const styleClasses = {
+  primary: "bg-green-600 text-white hover:bg-green-700",
+  secondary: "bg-blue-600 text-white hover:bg-blue-700",
+  outline: "border border-green-600 text-green-600 hover:bg-green-100",
+};
+---
+
+<a href={href} class={`${baseClasses} ${styleClasses[style]}`}>
+  {text}
+</a>

@@ -1,10 +1,19 @@
 ---
 const navLinks = [
-  { href: '/', label: 'ホーム' },
-  { href: '/kids/', label: 'キッズクラス' },
-  { href: '/about/', label: '運営者情報' },
-  { href: '/news/', label: '活動報告' },
-  { href: '/library/', label: 'レッスン動画' },
+  { href: '/', label: 'HOME' },
+  {
+    href: '/#lesson',
+    label: 'LESSON',
+    children: [
+      { href: '/activities/standard/', label: '大人クラス' },
+      { href: '/activities/kids/', label: 'キッズクラス' },
+      { href: '/activities/gold/', label: 'ゴールドクラス' },
+      { href: '/activities/salsa/', label: 'サルサ専門' },
+      { href: '/activities/neko-odori/', label: '猫おどり部' },
+    ],
+  },
+  { href: '#', label: 'NEWS' },
+  { href: '#', label: 'LIBRARY' },
 ];
 ---
 
@@ -16,9 +25,27 @@ const navLinks = [
 
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">
       {navLinks.map((link) => (
-        <a href={link.href} class="text-sm font-medium text-slate-700 transition hover:text-slate-900">
-          {link.label}
-        </a>
+        link.children ? (
+          <div class="relative group py-4">
+            <a href={link.href} class="text-sm font-medium text-slate-700 transition hover:text-slate-900 flex items-center gap-1">
+              {link.label}
+              <svg class="h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <div class="absolute left-1/2 -translate-x-1/2 top-full z-50 w-48 rounded-xl bg-white py-2 shadow-xl ring-1 ring-black/5 transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible">
+              {link.children.map((child) => (
+                <a href={child.href} class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={link.href} class="text-sm font-medium text-slate-700 transition hover:text-slate-900 py-4">
+            {link.label}
+          </a>
+        )
       ))}
     </nav>
 
@@ -51,9 +78,24 @@ const navLinks = [
   <nav id="mobile-menu" class="hidden border-t border-slate-200 bg-white/95 px-4 pb-4 md:hidden" aria-label="Mobile navigation">
     <div class="flex flex-col gap-2 pt-3">
       {navLinks.map((link) => (
-        <a href={link.href} class="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
-          {link.label}
-        </a>
+        link.children ? (
+          <div>
+            <a href={link.href} class="block rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100">
+              {link.label}
+            </a>
+            <div class="ml-4 flex flex-col gap-1 border-l-2 border-slate-100 pl-4 py-1">
+              {link.children.map((child) => (
+                <a href={child.href} class="rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={link.href} class="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+            {link.label}
+          </a>
+        )
       ))}
       <a
         href="#"

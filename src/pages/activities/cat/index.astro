@@ -1,0 +1,154 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/Button.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { label: 'ホーム', href: '/' },
+  { label: 'レッスン', href: '/#lesson' },
+  { label: '猫おどり部' },
+];
+---
+
+<Layout title="猫おどり部 | ZUNTOMO">
+  <main class="bg-gradient-to-b from-yellow-50 to-white">
+    
+    {/* ① ヒーローエリア */}
+    <section class="relative w-full h-96 bg-gradient-to-r from-yellow-500 to-orange-500 flex flex-col items-center justify-center text-center px-4">
+      <div class="absolute inset-0 bg-orange-500 opacity-75"></div>
+      <div class="relative z-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+          世代を超えて「にゃんこ」になろう！
+        </h1>
+        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-md">
+          2万人が熱狂する奇祭・かんなみ猫おどりを一緒に盛り上げませんか？
+        </p>
+      </div>
+    </section>
+
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+      
+      {/* ② コンセプト・ストーリー */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-yellow-400 pb-3 mb-6">
+          🐱 函南町で30年以上愛される奇祭を、みんなで継承！
+        </h2>
+        <div class="bg-yellow-50 rounded-lg p-6 shadow-md">
+          <p class="text-gray-800 text-lg leading-relaxed mb-4">
+            10匹の保護猫と暮らす「猫大好きインストラクター」が、かんなみ猫おどり実行委員会様と二人三脚でダンスの練習・普及活動を行っています。
+          </p>
+          <p class="text-gray-800 text-lg leading-relaxed mb-4">
+            幼稚園のお子様から、アイドル猫、パパママ猫、そして70代のシニア世代まで、幅広い年齢層の踊り手が大活躍中です。
+          </p>
+          <p class="text-gray-800 text-lg leading-relaxed">
+            毎年2万人の来場者を誇る地域の伝統ある楽しいお祭りを、最高の仲間たちと一緒に盛り上げましょう！
+          </p>
+        </div>
+      </section>
+
+      {/* ③ スケジュールと参加案内 */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-yellow-400 pb-3 mb-6">
+          🎯 練習会 ＆ イベント出演 詳細
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* カード1: 水曜日 無料練習会 */}
+          <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-yellow-500 hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-yellow-700 mb-4">😺 ズンとも猫おどり部 無料練習会</h3>
+            
+            <div class="space-y-3 mb-4">
+              <p class="text-gray-800"><strong class="text-gray-900">📅 開催日時:</strong></p>
+              <p class="text-xl font-bold text-yellow-600">毎週水曜日 18:45〜19:15（30分）</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">📍 会場:</strong></p>
+              <p class="text-gray-800">函南町西部コミュニティセンター</p>
+              
+              <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-3 rounded mt-3">
+                <p class="font-bold text-lg">⚠️ 特記事項：毎年7月・8月のみ、会場が「函南町文化センター」に変更となります</p>
+              </div>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">💰 料金:</strong></p>
+              <p class="text-2xl font-bold text-green-600">0円（無料）</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+              <span class="bg-yellow-100 text-yellow-700 text-xs font-medium px-2.5 py-0.5 rounded-full">無料</span>
+              <span class="bg-yellow-100 text-yellow-700 text-xs font-medium px-2.5 py-0.5 rounded-full">初心者歓迎</span>
+              <span class="bg-yellow-100 text-yellow-700 text-xs font-medium px-2.5 py-0.5 rounded-full">全世代参加OK</span>
+              <span class="bg-yellow-100 text-yellow-700 text-xs font-medium px-2.5 py-0.5 rounded-full">かんなみ猫おどり</span>
+            </div>
+          </div>
+
+          {/* カード2: 発表会 ＆ 本番ステージ */}
+          <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-orange-500 hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-orange-700 mb-4">🎭 発表会 ＆ 本番ステージ</h3>
+            
+            <div class="space-y-3 mb-4">
+              <p class="text-gray-800"><strong class="text-gray-900">📅 イベント（月1回）:</strong></p>
+              <p class="text-gray-800">月に1回程度、地域のイベント等でダンスの発表があります（自由参加）。</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">🎪 本番ステージ（10月）:</strong></p>
+              <p class="text-xl font-bold text-orange-600">毎年10月 かんなみ猫おどり本番</p>
+              <p class="text-gray-700">来場者数2万人の巨大ステージに出演します！</p>
+              
+              <p class="text-gray-800 mt-4"><strong class="text-gray-900">👗 衣装について:</strong></p>
+              <p class="text-gray-800">普段の練習着は自由です。</p>
+              <p class="text-gray-800">本番は思いっきりの「猫コスプレ＆猫メイク」で変身して楽しみましょう！</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">自由参加</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">猫コスプレ必須（本番）</span>
+              <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">思い出作り</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ④ 特徴セクション */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-orange-800 border-b-4 border-yellow-400 pb-3 mb-6">
+          ✨ 猫おどり部の3つの魅力
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-lg p-6 shadow-md border-t-4 border-yellow-500">
+            <div class="text-5xl mb-4 text-center">🎪</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">伝統ある奇祭</h3>
+            <p class="text-gray-800 text-center">
+              30年以上の歴史を持つ「かんなみ猫おどり」。地域の誇りを一緒に守りましょう。
+            </p>
+          </div>
+          <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-lg p-6 shadow-md border-t-4 border-orange-500">
+            <div class="text-5xl mb-4 text-center">🐱</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">猫好き集まれ！</h3>
+            <p class="text-gray-800 text-center">
+              猫大好きインストラクターと一緒に、猫メイクやコスプレで楽しく踊りましょう。
+            </p>
+          </div>
+          <div class="bg-gradient-to-br from-pink-100 to-pink-50 rounded-lg p-6 shadow-md border-t-4 border-pink-500">
+            <div class="text-5xl mb-4 text-center">👨‍👩‍👧‍👦</div>
+            <h3 class="text-xl font-bold text-orange-800 mb-3 text-center">全世代が仲間</h3>
+            <p class="text-gray-800 text-center">
+              幼稚園のお子様から70代のシニアまで。年齢なんて関係ない、みんなが仲間です。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CVエリア */}
+      <section class="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 rounded-lg p-8 text-center shadow-xl">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          一緒に「にゃんこ」になって、お祭りを盛り上げませんか？
+        </h2>
+        <p class="text-white text-lg mb-6">
+          どんな小さな疑問も公式LINEで受付中！インストラクターが直接丁寧にお答えします。
+        </p>
+        <Button href="#" text="LINEで今すぐ相談・体験申込" style="primary" />
+      </section>
+
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { label: 'ホーム', href: '/' },
+  { label: 'プライバシーポリシー' },
+];
+---
+
+<Layout title="プライバシーポリシー | ZUNTOMO">
+  <main class="bg-gradient-to-b from-gray-50 to-white">
+    
+    <Breadcrumb items={breadcrumbItems} />
+
+    <div class="container mx-auto px-4 py-12">
+      <div class="max-w-3xl mx-auto">
+        
+        {/* 大見出し */}
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 border-b-4 border-green-500 pb-4 mb-8">
+          プライバシーポリシー
+        </h1>
+
+        {/* 導入文 */}
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded mb-10">
+          <p class="text-gray-800 text-lg leading-relaxed">
+            ZUNTOMO（以下、「当サークル」）は、本ウェブサイト上で提供するサービスにおける、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」）を定めます。
+          </p>
+        </div>
+
+        {/* セクション1: 個人情報の取得と利用目的 */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            1. 個人情報の取得と利用目的
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              当サークルは、お問い合わせ（LINE等）やイベント参加申し込みの際、お名前、ご連絡先等の個人情報をご登録いただく場合がございます。これらの個人情報は、以下の目的でのみ利用し、それ以外の目的では利用いたしません。
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>お問い合わせに対する回答や必要な情報のご連絡のため</li>
+              <li>当サークルが主催するクラス、イベント等のご案内や運営管理のため</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* セクション2: 個人情報の第三者への開示・提供 */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            2. 個人情報の第三者への開示・提供
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              当サークルは、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>法令に基づく場合</li>
+              <li>人の生命、身体または財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* セクション3: アクセス解析ツールについて */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            3. アクセス解析ツールについて
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              当サイトでは、Googleによるアクセス解析ツール（Googleアナリティクス等）を利用しています。これらのアクセス解析ツールはトラフィックデータの収集のためにCookieを使用しています。トラフィックデータは匿名で収集されており、個人を特定するものではありません。この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。
+            </p>
+          </div>
+        </section>
+
+        {/* セクション4: 著作権・肖像権について */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            4. 著作権・肖像権について
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              当サイトで掲載している文章や画像などにつきましては、無断転載することを禁止します。当サイトは著作権や肖像権の侵害を目的としたものではありません。
+            </p>
+          </div>
+        </section>
+
+        {/* セクション5: 免責事項 */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            5. 免責事項
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              当サイトからのリンクやバナーなどで移動した外部サイトで提供される情報、サービス等について当サークルは一切の責任を負いません。また、当サイトのコンテンツ・情報について、できる限り正確な情報を提供するように努めておりますが、正確性や安全性を完全に保証するものではありません。
+            </p>
+          </div>
+        </section>
+
+        {/* セクション6: お問い合わせ窓口 */}
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-6">
+            6. お問い合わせ窓口
+          </h2>
+          <div class="text-gray-800 leading-relaxed space-y-4">
+            <p>
+              本ポリシーに関するお問い合わせ、または個人情報の取り扱いに関するご相談は、下記の窓口までお願いいたします。
+            </p>
+            <div class="bg-gray-50 border-l-4 border-gray-400 p-6 rounded mt-4">
+              <ul class="space-y-3">
+                <li class="flex">
+                  <span class="font-semibold text-gray-700 w-32 flex-shrink-0">団体名：</span>
+                  <span class="text-gray-800">ZUNTOMO</span>
+                </li>
+                <li class="flex">
+                  <span class="font-semibold text-gray-700 w-32 flex-shrink-0">代表インストラクター：</span>
+                  <span class="text-gray-800">影島鈴花</span>
+                </li>
+                <li class="flex">
+                  <span class="font-semibold text-gray-700 w-32 flex-shrink-0">マネージャー：</span>
+                  <span class="text-gray-800">加藤祐介</span>
+                </li>
+                <li class="flex">
+                  <span class="font-semibold text-gray-700 w-32 flex-shrink-0">連絡先：</span>
+                  <span class="text-gray-800">ZUNTOMO公式LINE</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 最終更新日 */}
+        <div class="text-center text-gray-600 text-sm mt-12 pt-8 border-t border-gray-200">
+          <p>最終更新日：2024年</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</Layout>
