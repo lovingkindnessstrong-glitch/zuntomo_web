@@ -2,6 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// サルサ・バチャータ用のヒーロー画像をインポート
+import salsaHero from '../../../assets/images/activities/salsa/salsa-hero-1200.webp';
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -14,8 +18,17 @@ const breadcrumbItems = [
   <main class="bg-gradient-to-b from-orange-50 to-white">
     
     {/* ① ヒーローエリア */}
-    <section class="relative w-full h-96 bg-gradient-to-r from-red-500 to-orange-600 flex flex-col items-center justify-center text-center px-4">
-      <div class="absolute inset-0 bg-orange-600 opacity-75"></div>
+    <section class="relative w-full h-96 overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像 */}
+      <Image 
+        src={salsaHero} 
+        alt="サルサ・バチャータの練習風景" 
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      {/* 半透明オーバーレイ（写真の熱気を残しつつ文字を読みやすくする調整） */}
+      <div class="absolute inset-0 bg-black/50"></div>
+      
+      {/* テキストコンテンツ */}
       <div class="relative z-10">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
           （水曜）無料でペアダンスの練習し放題！！
@@ -37,10 +50,10 @@ const breadcrumbItems = [
         </h2>
         <div class="bg-orange-50 rounded-lg p-6 shadow-md">
           <p class="text-gray-800 text-lg leading-relaxed mb-4">
-            代表自身が初めてサルサソーシャルに参加した際、右も左も分からず苦い経験をしたことが原点です。
+            代表自身が初めてサルサソーシャルに参加した際、右も左も分からずとても苦い経験をしたことが原点です。
           </p>
           <p class="text-gray-800 text-lg leading-relaxed mb-4">
-            近隣ではレッスン料が高額なため、初心者同士が「ソーシャル（公道）に出る前の安全な教習所コース」として気兼ねなく練習できる場所を作りました。
+            自動車に例えると、初心者が「ソーシャル（公道）」に出る前の安全な「ペアダンス教習所コース」として、気兼ねなく練習できる場所を作りました。
           </p>
           <p class="text-gray-800 text-lg leading-relaxed">
             先生はいません！失敗を恐れず、思う存分練習できます。完全に趣味の集まりとして、手作りのお料理とお酒を楽しみながら、優しい仲間たちとゆっくり踊れる空間です。
@@ -67,7 +80,13 @@ const breadcrumbItems = [
               </div>
               
               <p class="text-gray-800 mt-4"><strong class="text-gray-900">📍 会場:</strong></p>
-              <p class="text-gray-800">函南町西部コミュニティセンター 多目的ルーム</p>
+              <p class="text-gray-800 flex flex-wrap items-center gap-x-4 gap-y-1">
+                <span>函南町西部コミュニティセンター 多目的ルーム</span>
+                <span class="inline-flex items-center gap-3">
+                  <a href="https://www.town.kannami.shizuoka.jp/soshiki/1017/4/781.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+                  <a href="https://maps.app.goo.gl/9uuzb9YohR1EL22VA" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+                </span>
+              </p>
               
               <p class="text-gray-800 mt-4"><strong class="text-gray-900">💰 料金:</strong></p>
               <p class="text-2xl font-bold text-green-600">0円（無料）</p>
@@ -95,7 +114,12 @@ const breadcrumbItems = [
               <p class="text-gray-700">※月1回開催</p>
               
               <p class="text-gray-800 mt-4"><strong class="text-gray-900">📍 会場:</strong></p>
-              <p class="text-gray-800">三浦ダンススタジオ（沼津市）2F 大ホール</p>
+              <p class="text-gray-800 flex flex-wrap items-center gap-x-4 gap-y-1">
+                <span>三浦ダンススタジオ（沼津市）2F 大ホール</span>
+                <span class="inline-flex items-center gap-3">
+                  <a href="https://maps.app.goo.gl/XXXXXXXXX" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+                </span>
+              </p>
               
               <p class="text-gray-800 mt-4"><strong class="text-gray-900">💰 料金:</strong></p>
               <p class="text-2xl font-bold text-orange-600">2,000円</p>
