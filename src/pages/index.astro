@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import activities from '../data/activities.json';
+import { Image } from 'astro:assets';
+
+// 再配置したトップページ用のヒーロー画像をインポート
+import heroImage from '../assets/images/home/hero.png';
 
 // カテゴリIDごとのカラースキーム
 const colorSchemes: Record<string, { bg: string; icon: string; button: string; hover: string }> = {
@@ -20,11 +24,11 @@ const icons: Record<string, string> = {
 ---
 
 <Layout title="ダンスサークル「ズンとも」| 沼津・三島の大人向けZUMBA・キッズダンス教室">
-  <!-- ヒーローエリア -->
   <section class="hero-section relative h-96 w-full overflow-hidden md:h-[500px]">
-    <img 
-      src="/images/hero.png" 
-      alt="ダンスの写真" 
+    {/* AstroのImageコンポーネントに変更し、インポートした画像ソースをマージ */}
+    <Image 
+      src={heroImage} 
+      alt="ダンスサークル「ズンとも」のレッスン風景" 
       class="hero-image absolute inset-0 h-full w-full"
     />
     <div class="hero-overlay absolute inset-0"></div>
@@ -45,7 +49,6 @@ const icons: Record<string, string> = {
       </p>
     </section>
 
-    <!-- クラス案内セクション -->
     <section class="mx-auto max-w-6xl px-6 py-12 sm:px-8 md:py-20">
       <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">
         活動情報・クラス案内

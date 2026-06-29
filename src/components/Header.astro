@@ -1,4 +1,7 @@
 ---
+// astro:assets の Image インポートは削除し、画像ファイルだけをインポートします
+import logoImage from '../assets/images/common/logo.svg';
+
 const navLinks = [
   { href: '/', label: 'HOME' },
   {
@@ -20,7 +23,8 @@ const navLinks = [
 <header class="sticky top-0 z-50 bg-white/95 shadow-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1 md:px-6">
     <a href="/" class="logo-link flex items-center" aria-label="ズンともホーム">
-      <img src="/images/logo.svg" alt="ズンとも" class="logo-image" />
+      {/* SVG画像はAstro公式推奨に従い、標準のimgタグを使用し、.src でパスを渡します */}
+      <img src={logoImage.src} alt="ズンとも" class="logo-image" />
     </a>
 
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">

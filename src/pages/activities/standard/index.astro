@@ -2,6 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// 大人クラス用のヒーロー画像をインポート
+import standardHero from '../../../assets/images/activities/standard/standard-hero-1200.webp';
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -13,14 +17,26 @@ const breadcrumbItems = [
 <Layout title="大人クラス（スタンダード） | ZUNTOMO">
   <main class="bg-white">
     {/* ① ヒーローエリア */}
-    <section class="relative w-full h-96 bg-gray-200 flex flex-col items-center justify-center text-center px-4">
-    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-      音楽に身を任せて、最高のリフレッシュを！
-    </h1>
-    <p class="text-lg md:text-xl text-white max-w-2xl drop-shadow-md">
-      学生からアクティブシニアまで、誰でも主役になれるメインクラス。<br />
-      平日の昼下がりに、仕事帰りの夜に。心地よい汗を流せる場所です。
-    </p>
+    <section class="relative w-full h-96 overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像 */}
+      <Image 
+        src={standardHero} 
+        alt="大人クラスのレッスン風景" 
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      {/* 半透明オーバーレイ（文字の視認性確保用） */}
+      <div class="absolute inset-0 bg-black/40"></div>
+      
+      {/* テキストコンテンツ */}
+      <div class="relative z-10">
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+          音楽に身を任せて、最高のリフレッシュを！
+        </h1>
+        <p class="text-lg md:text-xl text-white max-w-2xl mx-auto drop-shadow-md">
+          学生からアクティブシニアまで、誰でも主役になれるメインクラス。<br />
+          平日の昼下がりに、仕事帰りの夜に。心地よい汗を流せる場所です。
+        </p>
+      </div>
     </section>
 
     <Breadcrumb items={breadcrumbItems} />
@@ -56,7 +72,13 @@ const breadcrumbItems = [
           <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-orange-500 hover:shadow-lg transition-shadow duration-300">
             <h3 class="text-xl font-bold text-orange-700 mb-3">💃 ZUMBA® / S-DANCE（ブラッサムゆず）</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 火曜日 14:15 〜 15:15（60分）</p>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> ブラッサムゆず（三島市） <a href="#" class="text-blue-500 hover:underline text-sm">[ → GoogleMap ]</a></p>
+            <p class="text-gray-700 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span><strong class="text-gray-800">会場:</strong> ブラッサムゆず（三島市）</span>
+              <span class="inline-flex items-center gap-3">
+                <a href="https://www.b-yuzu.com/?page_id=176" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+                <a href="https://maps.app.goo.gl/eGgQ58D4ZrCzp8oc6" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+              </span>
+            </p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">料金:</strong> 500円（現金都度払い）</p>
             <p class="text-sm text-gray-600 mt-4 border-t pt-3">参加方法: 予約不要。現地に直接集合。</p>
             <div class="mt-4 flex flex-wrap gap-2">
@@ -71,11 +93,26 @@ const breadcrumbItems = [
             <h3 class="text-xl font-bold text-orange-700 mb-3">💃 ZUMBA® / S-DANCE（函南サークル）</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 水曜日 19:30 〜 20:30（60分）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> <span class="text-red-600 font-semibold">※季節によって開催場所が変わります！</span></p>
-            <ul class="list-disc list-inside ml-5 text-gray-600 text-sm mb-2">
-              <li>通常期（9月〜6月）: 函南町西部コミュニティセンター 多目的ルーム <a href="#" class="text-blue-500 hover:underline">[ → GoogleMap ]</a></li>
-              <li>夏期（7月・8月限定）: 函南町文化センター（冷房完備） <a href="#" class="text-blue-500 hover:underline">[ → GoogleMap ]</a></li>
+            <ul class="list-disc list-outside ml-5 text-gray-600 text-sm mb-2 space-y-2">
+              <li>
+                <div class="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span>通常期（9月〜6月）: 函南町西部コミュニティセンター 多目的ルーム</span>
+                  <span class="inline-flex items-center gap-3">
+                    <a href="https://www.town.kannami.shizuoka.jp/soshiki/1017/4/781.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">公式サイト</a>
+                    <a href="https://maps.app.goo.gl/9uuzb9YohR1EL22VA" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">Googleマップ</a>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span>夏期（7月・8月限定）: 函南町文化センター（冷房完備）</span>
+                  <span class="inline-flex items-center gap-3">
+                    <a href="https://www.town.kannami.shizuoka.jp/soshiki/1017/4/792.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">Googleマップ</a>
+                  </span>
+                </div>
+              </li>
             </ul>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">料金:</strong> 500円（現金都度払い） <span class="text-red-600 font-semibold">※7・8月のみ冷房代カンパあり</span></p>
+            <p class="text-gray-700 mb-2 mt-3"><strong class="text-gray-800">料金:</strong> 500円（現金都度払い） <span class="text-red-600 font-semibold">※7・8月のみ冷房代カンパあり</span></p>
             <p class="text-sm text-gray-600 mt-4 border-t pt-3">参加方法: 予約不要。現地に直接集合。</p>
             <div class="mt-4 flex flex-wrap gap-2">
               <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ZUMBA®</span>
@@ -86,7 +123,7 @@ const breadcrumbItems = [
               <p class="font-bold">運営からのお知らせ:</p>
               <ul class="list-disc list-inside ml-4">
                 <li>西部コミュニティセンターには冷房がないため、熱中症対策として7〜8月は涼しい「文化センター」へ避難して開催します！</li>
-                <li>利用料が高くなるため、この2ヶ月間だけ冷房代の数十円のカンパ（割り勘）をご協力いただいております。</li>
+                <li>利用料が高くなるため、この2ヶ月間だけ冷房代の数百円のカンパ（割り勘）をご協力いただいております。</li>
               </ul>
             </div>
           </div>
@@ -95,11 +132,27 @@ const breadcrumbItems = [
             <h3 class="text-xl font-bold text-orange-700 mb-3">💃 ZUMBA®（三島サークル）</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 土曜日 9:30 〜 10:30（60分）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> <span class="text-red-600 font-semibold">※施設の抽選都合により、以下のどちらかで開催します（平均月3回稼働）。</span></p>
-            <ul class="list-disc list-inside ml-5 text-gray-600 text-sm mb-2">
-              <li>錦田公民館（三島市） <a href="#" class="text-blue-500 hover:underline">[ → GoogleMap ]</a></li>
-              <li>坂公民館（三島市） <a href="#" class="text-blue-500 hover:underline">[ → GoogleMap ]</a></li>
+            <ul class="list-disc list-outside ml-5 text-gray-600 text-sm mb-2 space-y-2">
+              <li>
+                <div class="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span>錦田公民館（三島市）</span>
+                  <span class="inline-flex items-center gap-3">
+                    <a href="https://www.city.mishima.shizuoka.jp/soshiki/63/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">公式サイト</a>
+                    <a href="https://maps.app.goo.gl/u2V2rygRK8wSgoTT8" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">Googleマップ</a>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span>坂公民館（三島市）</span>
+                  <span class="inline-flex items-center gap-3">
+                    <a href="https://www.city.mishima.shizuoka.jp/soshiki/61/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">公式サイト</a>
+                    <a href="https://maps.app.goo.gl/d7hv7NhpstsdfkBy7" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors">Googleマップ</a>
+                  </span>
+                </div>
+              </li>
             </ul>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">料金:</strong> 500円（現金都度払い）</p>
+            <p class="text-gray-700 mb-2 mt-3"><strong class="text-gray-800">料金:</strong> 500円（現金都度払い）</p>
             <p class="text-sm text-gray-600 mt-4 border-t pt-3">参加方法: 予約不要。直接現地へお越しください。</p>
             <div class="mt-4 flex flex-wrap gap-2">
               <span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ZUMBA®</span>
@@ -127,9 +180,18 @@ const breadcrumbItems = [
             <h3 class="text-xl font-bold text-blue-700 mb-3">💃 自由教室「シンプルダンスエクササイズ」</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">主催:</strong> 裾野市民体育館（シンコースポーツ）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 月曜日 14:00 〜 14:50（50分）</p>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> 裾野市民体育館（裾野市）1F 多目的ルーム <a href="#" class="text-blue-500 hover:underline text-sm">[ → 公式案内 ]</a> <a href="#" class="text-blue-500 hover:underline text-sm">[ → GoogleMap ]</a></p>
+            <p class="text-gray-700 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span><strong class="text-gray-800">会場:</strong> 裾野市民体育館（裾野市）1F 多目的ルーム</span>
+              <span class="inline-flex items-center gap-3">
+                <a href="https://susono-sportspark.info/facility/gymnasium/multiple/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+                <a href="https://maps.app.goo.gl/9uuzb9YohR1EL22VA5" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+              </span>
+            </p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">受付・方法:</strong> 裾野市民体育館 窓口にて。初回「自由教室会員カード」作成後、都度払い。</p>
-            <p class="text-gray-700 mb-4"><strong class="text-gray-800">料金:</strong> 600円（現金のみ）</p>
+            <p class="text-gray-700 mb-4">
+              <strong class="text-gray-800">料金:</strong> 1回 800円（現金のみ）<br />
+              <span class="text-sm text-gray-600">※自由教室共通回数券あり（10枚綴り 6,000円）</span>
+            </p>
             <div class="mt-4 flex flex-wrap gap-2">
               <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">S-DANCE™</span>
               <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ダンス入門</span>
@@ -142,21 +204,36 @@ const breadcrumbItems = [
             <h3 class="text-xl font-bold text-blue-700 mb-3">💃 自由教室「ZUMBA®」</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">主催:</strong> 裾野市民体育館（シンコースポーツ）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 月曜日 20:00 〜 20:50（50分）</p>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> 裾野市民体育館（裾野市）1F 多目的ルーム <a href="#" class="text-blue-500 hover:underline text-sm">[ → GoogleMap ]</a></p>
+            <p class="text-gray-700 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span><strong class="text-gray-800">会場:</strong> 裾野市民体育館（裾野市）1F 多目的ルーム</span>
+              <span class="inline-flex items-center gap-3">
+                <a href="https://susono-sportspark.info/facility/gymnasium/multiple/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+                <a href="https://maps.app.goo.gl/9uuzb9YohR1EL22VA6" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+              </span>
+            </p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">受付・方法:</strong> 裾野市民体育館 窓口にて。初回「自由教室会員カード」作成後、都度払い。</p>
-            <p class="text-gray-700 mb-4"><strong class="text-gray-800">料金:</strong> 600円（現金のみ）</p>
+            <p class="text-gray-700 mb-4">
+              <strong class="text-gray-800">料金:</strong> 1回 800円（現金のみ）<br />
+              <span class="text-sm text-gray-600">※自由教室共通回数券あり（10枚綴り 6,000円）</span>
+            </p>
             <div class="mt-4 flex flex-wrap gap-2">
               <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">ZUMBA®</span>
               <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">夜活</span>
               <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">どなたでも</span>
             </div>
           </div>
-
+          
           <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500 hover:shadow-lg transition-shadow duration-300">
             <h3 class="text-xl font-bold text-blue-700 mb-3">🕺 香陵アリーナ フィットネスレッスン ZUMBA®</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">主催:</strong> 沼津市総合体育館（ミズノ）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 木曜日 13:15 〜 14:00（45分）</p>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> 沼津市総合体育館（香陵アリーナ）2F 多目的スタジオ <a href="#" class="text-blue-500 hover:underline text-sm">[ → フィットネスプログラム詳細 ]</a> <a href="#" class="text-blue-500 hover:underline text-sm">[ → GoogleMap ]</a></p>
+            <p class="text-gray-700 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span><strong class="text-gray-800">会場:</strong> 沼津市総合体育館（香陵アリーナ）2F 多目的スタジオ</span>
+              <span class="inline-flex items-center gap-3">
+                <a href="https://city.numazu-sougoutaiikukan.jp/gallery" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+                <a href="https://maps.app.goo.gl/CAy7w61nWY4XLd929" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">Googleマップ</a>
+              </span>
+            </p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">受付・方法:</strong> 1F受付にて「月間フィットネス会員」入会後、レッスン開始15分前から受付。</p>
             <p class="text-gray-700 mb-4"><strong class="text-gray-800">料金:</strong> 月額 4,000円（利用する月のみの支払いでOK！様々なスタジオレッスンが受け放題になります）</p>
             <div class="mt-4 flex flex-wrap gap-2">
@@ -170,7 +247,12 @@ const breadcrumbItems = [
             <h3 class="text-xl font-bold text-blue-700 mb-3">💃 MIZUNO SPORTS SCHOOL「ミズノ ZUMBA®」</h3>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">主催:</strong> 清水町体育館（清水町体育協会）</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">時間:</strong> 金曜日 19:10 〜 20:00（50分）</p>
-            <p class="text-gray-700 mb-2"><strong class="text-gray-800">会場:</strong> 清水町体育館（清水町） <a href="#" class="text-blue-500 hover:underline text-sm">[ → 応募はこちら(WEB) ]</a> <a href="#" class="text-blue-500 hover:underline text-sm">[ → 募集要項(PDF面) ]</a> <a href="#" class="text-blue-500 hover:underline text-sm">[ → GoogleMap ]</a></p>
+            <p class="text-gray-700 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span><strong class="text-gray-800">会場:</strong> 清水町体育館（清水町）</span>  
+              <span class="inline-flex items-center gap-3">
+                <a href="https://www.town.shimizu.shizuoka.jp/taiku/s_taiku00006.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 text-sm transition-colors">公式サイト</a>
+              </span>
+            </p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">受付・方法:</strong> 募集期間内に上記WEBページより事前申し込み（抽選制）。</p>
             <p class="text-gray-700 mb-2"><strong class="text-gray-800">料金:</strong> 全9回分 7,200円（初回日に窓口にて現金一括払い）</p>
             <p class="text-gray-700 mb-4"><strong class="text-gray-800">対象:</strong> 中学生から大人</p>
