@@ -1,10 +1,10 @@
 ---
-// astro:assets の Image インポートは削除し、画像ファイルだけをインポートします
 import logoImage from '../assets/images/common/logo.svg';
 
 const navLinks = [
   { href: '/', label: 'HOME' },
   { href: '/about/', label: 'ABOUT' },
+  { href: '/guide/', label: 'GUIDE' },
   {
     href: '/#lesson',
     label: 'LESSON',
@@ -12,7 +12,7 @@ const navLinks = [
       { href: '/activities/standard/', label: '大人クラス' },
       { href: '/activities/kids/', label: 'キッズクラス' },
       { href: '/activities/gold/', label: 'ゴールドクラス' },
-      { href: '/activities/salsa/', label: 'サルサ専門' },
+      { href: '/activities/salsa/', label: 'サルサ・バチャータ' },
       { href: '/activities/neko-odori/', label: '猫おどり部' },
     ],
   },
@@ -23,9 +23,10 @@ const navLinks = [
 
 <header class="sticky top-0 z-50 bg-white/95 shadow-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1 md:px-6">
-    <a href="/" class="logo-link flex items-center" aria-label="ズンともホーム">
-      {/* SVG画像はAstro公式推奨に従い、標準のimgタグを使用し、.src でパスを渡します */}
-      <img src={logoImage.src} alt="ズンとも" class="logo-image" />
+    
+    {/* ▼ 修正箇所：Tailwindクラス（h-16 md:h-20 = スマホで高さ64px、PCで80px）でサイズを直接指定 */}
+    <a href="/" class="flex items-center transition-opacity hover:opacity-80" aria-label="ズンともホーム">
+      <img src={logoImage.src} alt="ズンとも" class="h-16 md:h-20 w-auto" />
     </a>
 
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">
