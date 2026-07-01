@@ -1,0 +1,274 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// プロフィール画像のインポート
+import profileSuzu from '../../assets/images/about/profile_suzu.webp';
+import profileNiku from '../../assets/images/about/profile_niku.webp';
+import profileSho from '../../assets/images/about/profile_sho.webp';
+
+const breadcrumbItems = [
+  { label: 'ホーム', href: '/' },
+  { label: '運営者紹介・サークル理念' },
+];
+---
+
+<Layout title="運営者紹介・サークル理念 | 沼津・三島・函南のダンスサークル「ZUNTOMO」">
+  <main class="bg-slate-50">
+    
+    {/* ヒーローエリア */}
+    <section class="bg-gradient-to-br from-emerald-500 to-teal-600 py-20 px-4 text-center">
+      <div class="container mx-auto max-w-4xl">
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-sm">
+          運営者紹介・サークル理念
+        </h1>
+        <p class="text-lg md:text-xl text-emerald-50 leading-relaxed font-medium">
+          ダンスサークル「ズンとも」は、沼津・三島・裾野・函南など<br class="hidden md:block" />静岡県東部を中心に活動するコミュニティです。
+        </p>
+      </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+      <Breadcrumb items={breadcrumbItems} />
+
+      {/* リード文 */}
+      <section class="bg-white rounded-2xl shadow-sm p-8 md:p-12 mb-12 text-center mt-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6">誰もが主役になれる場所</h2>
+        <p class="text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto">
+          年齢や運動神経、ダンスの経験は一切問いません。<br />
+          学生からアクティブなシニア世代まで、誰もが「音楽に合わせて身体を動かす楽しさ」を共有できる場所を目指しています。
+        </p>
+      </section>
+
+      {/* プログラム紹介 (ZUMBA & S-DANCE) */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-12 relative pb-4">
+          プログラムのこだわり
+          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-emerald-500 rounded"></span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* ZUMBA */}
+          <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-yellow-400">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">世界中が夢中になる「ZUMBA®」</h3>
+            <p class="text-slate-700 leading-relaxed mb-4">
+              ZUMBA®は、世界中のポップソングやラテン音楽を使い、インストラクターの見様見真似で踊るフィットネスプログラムです。
+            </p>
+            <p class="text-slate-700 leading-relaxed mb-4">
+              近年のZUMBA®はダンス要素が強くなっていますが、高度なダンスステップやアイソレーション、リズムトレーニング、またエアロビクスのような記憶力や強度の心肺機能は求められません。
+            </p>
+            <div class="bg-yellow-50 p-4 rounded-lg font-medium text-yellow-800">
+              「世界中のダンスミュージックを聴きながら、頭を空っぽにして汗がかけるエクササイズ系のパーティ」それがZUMBA®です。
+            </div>
+          </div>
+
+          {/* S-DANCE */}
+          <div class="bg-white rounded-2xl shadow-sm p-8 border-t-4 border-blue-400">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">独自プログラム「S-DANCE™」</h3>
+            <p class="text-slate-700 leading-relaxed mb-4">
+              SUZUとSHOが考案した独自のフィットネスダンスプログラムです。「S」には、Sports、Simple、Silver（シニア層）でも踊れる、などの意味が込められています。
+            </p>
+            <p class="text-slate-700 leading-relaxed mb-4">
+              参加者さんからリクエストをもらう中で、歌謡曲、アイドル、演歌、アニメなど、ZUMBA®のラテンテイストには合わず採用が難しい曲が増えてきたため、別カテゴリとして立ち上げました。
+            </p>
+            <div class="bg-blue-50 p-4 rounded-lg font-medium text-blue-800">
+              現在、オリジナルコリオ（振付）を作成した曲は150曲以上！大好きな曲で世代を超えて楽しく身体を動かせます。
+            </div>
+          </div>
+        </div>
+
+        {/* マニアックなZUMBA知識（アコーディオン） */}
+        <div class="mt-8 space-y-4">
+          <details class="group border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between bg-slate-50 px-6 py-4 font-bold text-slate-800 transition hover:bg-slate-100">
+              もっと知りたい！ZUMBA®の歴史と規約のディープな話
+              <span class="transition group-open:rotate-180">
+                <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <div class="px-6 py-6 text-slate-700 space-y-6 border-t border-slate-200">
+              <div>
+                <h4 class="font-bold text-lg text-slate-800 mb-2">ZUMBA®の始まりと運営体制</h4>
+                <p class="leading-relaxed">コロンビアのインストラクター【Beto Perez】が、2001年に仲間と共にフロリダ州マイアミで創始しました。エアロビインストラクターだったBetoが、ある日レッスンに音楽テープを忘れてしまい、車にあったラテンポップスのカセットで即興レッスンをしたところ大好評だったのが始まりと言われています。<br>
+                世界本部はフロリダの「Zumba Fitness, LLC」。日本では相模原の「JWI（Japan Wellness Innovation）」が日本総代理店として、資格認定や規約の制定を行なっています。</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-slate-800 mb-2">厳格なルールとオリジナリティ</h4>
+                <p class="leading-relaxed">ZUMBA®には「1レッスンに必ず4つの基本ジャンル（MERENGUE, SALSA, REGGAETON, CUMBIA）を入れなければならない」等の規約が存在します。<br>
+                インストラクター資格（B1）を取得し、運用規約とフォーミュラ（インターバルトレーニングの原則と基本リズムの組み合わせ）をしっかり遵守すれば、残りの構成は裁量に任されるため、全国各地でオリジナリティ溢れるクラスが展開されています。</p>
+              </div>
+            </div>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden">
+            <summary class="flex cursor-pointer items-center justify-between bg-slate-50 px-6 py-4 font-bold text-slate-800 transition hover:bg-slate-100">
+              世界で活躍する日本人と、ZUMBA®の裏話
+              <span class="transition group-open:rotate-180">
+                <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <div class="px-6 py-6 text-slate-700 space-y-6 border-t border-slate-200">
+              <div>
+                <h4 class="font-bold text-lg text-slate-800 mb-2">トップインストラクターと公式DVD（ZIN™）</h4>
+                <p class="leading-relaxed">BASIC(B1)と呼ばれる基礎インストラクター講習を受講し、ZIN™会員として登録をすると、常設レッスンを開けるようになります。<br><br>
+                ZIN™会員には、偶数月に振り付け付きの「ZIN」シリーズ、奇数月に音楽のみの「Megamixシリーズ」が配信されます。<br>
+                ZIN™シリーズには、同じ曲に対して「LIVEバージョン」と「1on1バージョン」の2種類の振り付けが収録されます。<br>
+                日本のZUMBA™規約では、動画配信は「Instagram、TikTok、Facebookに限り、1分以内のみ可」（YouTubeは不可）という厳格なルールがあります。<br>
+                このため、インストラクターにならなくても公式の振り付け動画が欲しいためにZIN™会員に登録しているメンバーさんも沢山います。<br><br>
+                ZUMBA®界のトップインストラクターは、指導者の先生である「ZES」（日本国内約15名）と、振付を担当する「JAMMER」（日本国内約7名）です。<br>
+                また、世界のトップインストラクターは、先程お話した公式動画（ZIN™）のプレゼンターを務めます。<br>
+                2024年10月配信のZIN™113では、同じ静岡県のZES西ジェフィー先生と、幼少期より有名なJAMMER浅井海月先生がプレゼンターを務めました。<br>
+                他にも昔から多数のレジェンド級日本人インストラクターがDVDでBetoと共演しています。<br><br>
+                楽曲面では、日本人シンガーのAISHAさんが公式楽曲を多数提供しています。<br>
+                また、現在ZUMBA®インストラクターとしてもご活躍の早見優さんご自身のヒット曲「夏色のナンシー」のラテンカバーが採用されたり、Nando Boom,Hisatomi,DJ Ricky Lunaによる人気曲「Todo El Mundo」では、大阪のレゲエアーティストHISATOMI氏の日本語ラップがフィーチャーされています（マジで名曲）。</p>
+                このような背景からか、J-POPに対して長年K-POPの採用曲が著しく少なかったのですが、最近では公式曲のカテゴリからJ-POPが消え、K-POPが新設されています。
+              
+
+              </div>
+              <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                <h4 class="font-bold text-lg text-slate-800 mb-2">どうでもいい話</h4>
+                <p class="leading-relaxed text-sm">2014年、MAXが『情熱のZUMBA』という楽曲をavexからリリースしました。当時まだマイナーだった本格ラテンのZUMBA®と日本屈指の商業音楽の組み合わせによる、金の匂い全開のカオスさ（笑）で、（僕も含めて）未だに大好きな人も多いです。2025年末には、オールニューハーフの「矢神サラ with 東京オカ卍会」がリバイバルリリースしSNSでスマッシュヒットしました。が、たぶんZUMBA®界は大無視でした。</p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      {/* 理念とこだわり */}
+      <section class="bg-white rounded-2xl shadow-sm p-8 md:p-12 border-t-4 border-emerald-500 mb-16 text-center">
+        <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center justify-center gap-2">
+          <span class="text-3xl">🌱</span> ZUNTOMOが大切にしていること
+        </h2>
+        <p class="text-slate-700 text-lg leading-relaxed max-w-3xl mx-auto mb-4">
+          私たちが一番大切にしているのは、<strong class="text-emerald-600">「かんたん、たのしい、こうかてき」</strong>です。<br />
+          上手く踊ることよりも、仲間と一緒に笑い合い、心身ともにリフレッシュできる時間を何より重視しています。
+        </p>
+      </section>
+
+      {/* プロフィール */}
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-12 relative pb-4">
+          運営者・インストラクター紹介
+          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-emerald-500 rounded"></span>
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* SUZU */}
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
+            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileSuzu} alt="メインインストラクター SUZU" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex-grow">
+              <div class="mb-4">
+                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">メインインストラクター</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-1">SUZU</h3>
+              <p class="text-slate-500 text-sm mb-4">影島 鈴花</p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                静岡県函南町で3人の子供と10匹の保護猫と暮らしています。子育てでふさぎ込んでいた時期に矢野先生の無料ZUMBA®と出会い、インストラクターになりサークルを立ち上げて10年以上。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                「かんたん・たのしい・こうかてき！」をモットーに、地域の皆さんと一緒に楽しむダンス活動、シニアフィットネス、キッズダンスなど世代を超えた活動をしています。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <strong>趣味:</strong> 地元バレーボール「東レARROWS」の熱狂的ファン。編み物、マラソン、お酒…と多趣味なママさんです。
+              </p>
+            </div>
+          </div>
+
+          {/* NIKU */}
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
+            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileNiku} alt="運営マネージャー NIKU" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex-grow">
+              <div class="mb-4">
+                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">運営マネージャー</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-1">NIKU</h3>
+              <p class="text-slate-500 text-sm mb-4">加藤 祐介</p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                ZUMBA®で130kg→80kgの減量に成功しインストラクター資格を取得。太っている時に脳出血を発症し、右半身麻痺（車椅子）・言語障害になるが、自力で克服。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                現在も週3回の腎臓透析を必要とするが、インストラクター資格（SYNC/B1/IGFI）を維持。DJ・PAとしてサークルの運営に携わっています。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <strong>趣味:</strong> サンバ（マランドロ）
+              </p>
+            </div>
+          </div>
+
+          {/* SHO */}
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
+            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileSho} alt="サブインストラクター SHO" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex-grow">
+              <div class="mb-4">
+                <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">サブインストラクター</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-1">SHO</h3>
+              <p class="text-slate-500 text-sm mb-4">矢野 翔</p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                大手スポーツジムで店長として全国を飛び回った後、故郷三島へ。現在は機能訓練型デイサービスの施設長としてお年寄りの健康に携わる。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                10年前、デイサービス営業終了後に無料提供していたZUMBA®でSUZUと出会い、彼女のインストラクターへの道を後押し。
+              </p>
+              <p class="text-slate-700 text-sm leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                多忙な日々を送る傍ら、月に1回ズンとものステージに登壇して参加者に元気をお届けしています。
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 地域とのつながりと実績 */}
+      <section class="bg-white rounded-2xl shadow-sm p-8 md:p-12 mb-16 border-t-4 border-indigo-500">
+        <div class="text-center mb-8">
+          <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">実績と社会貢献</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-800">地域に開かれたコミュニティとして</h2>
+        </div>
+        
+        <p class="text-slate-700 text-lg leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          地域の公共体育館での定期レッスンのほか、「かんなみ猫おどり」などの地元イベントへの参加、小学校ダンスクラブの無料指導、高齢者施設や障害者団体様向けのボランティア活動も積極的に行っています。
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 mb-2">💸 参加しやすい価格設定</h4>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              学生の参加費を無料、大人の参加費を地域最安値の500円にしているのも、地域の方々が無理なく続けられる居場所でありたいという想いからです。
+            </p>
+          </div>
+          <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 mb-2">🎓 インストラクターの輩出</h4>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              10年以上の活動歴を持つ「ズンとも」からは、何名ものサークルメンバーさんが資格を取得し、独立して各地のスポーツジムやサークルで活躍しています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CVエリア */}
+      <section class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 md:p-12 text-center shadow-lg">
+        <h2 class="text-3xl font-bold text-white mb-6">
+          まずは一度、見学や体験に<br class="md:hidden" />遊びに来てみませんか？
+        </h2>
+        <p class="text-emerald-50 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+          「運動不足を解消したい」「新しく何かを始めたい」きっかけは何でも構いません。いつでも温かくお迎えします！
+        </p>
+        <Button href="#" text="LINEで今すぐ相談・体験申込" style="primary" class="bg-white text-teal-600 hover:bg-slate-50 shadow-md text-lg px-8 py-3" />
+      </section>
+
+    </div>
+  </main>
+</Layout>
