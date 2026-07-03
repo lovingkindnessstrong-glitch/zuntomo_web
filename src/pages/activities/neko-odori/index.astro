@@ -2,6 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// 猫おどり部用のヒーロー画像をインポート
+import nekoHero from '../../../assets/images/activities/cat/neko-hero-1200.webp';
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -13,19 +17,29 @@ const breadcrumbItems = [
 <Layout title="猫おどり部 | ZUNTOMO">
   <main class="bg-gradient-to-b from-yellow-50 to-white">
     
-    {/* ① ヒーローエリア */}
-    <section class="relative w-full h-96 bg-gradient-to-r from-yellow-500 to-orange-600 flex flex-col items-center justify-center text-center px-4">
-      <div class="absolute inset-0 bg-orange-600 opacity-75"></div>
+{/* ① ヒーローエリア */}
+    <section class="relative w-full h-96 overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像 */}
+      <Image 
+        src={nekoHero} 
+        alt="かんなみ猫おどりの様子" 
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      {/* オーバーレイを少し濃く調整（50% → 60%） */}
+      <div class="absolute inset-0 bg-black/60"></div>
+      
+      {/* テキストコンテンツ */}
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        {/* カスタムの強いドロップシャドウを適用して文字を浮き立たせる */}
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
           世代を超えて「にゃんこ」になろう！
         </h1>
-        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-md">
+        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           2万人が熱狂する奇祭・かんなみ猫おどりを一緒に盛り上げませんか？
         </p>
       </div>
     </section>
-
+    
     <Breadcrumb items={breadcrumbItems} />
 
     <div class="container mx-auto px-4 py-12 max-w-5xl">

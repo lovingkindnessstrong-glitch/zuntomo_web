@@ -9,6 +9,9 @@ import profileSuzu from '../../assets/images/about/profile_suzu.webp';
 import profileNiku from '../../assets/images/about/profile_niku.webp';
 import profileSho from '../../assets/images/about/profile_sho.webp';
 
+// 出張レッスンの画像をインポート（Goldページと共通の画像を使用）
+import volunteerImg from '../../assets/images/activities/gold/volunteer.webp';
+
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
   { label: '運営者紹介・サークル理念' },
@@ -123,9 +126,7 @@ const breadcrumbItems = [
                 他にも昔から多数のレジェンド級日本人インストラクターがDVDでBetoと共演しています。<br><br>
                 楽曲面では、日本人シンガーのAISHAさんが公式楽曲を多数提供しています。<br>
                 また、現在ZUMBA®インストラクターとしてもご活躍の早見優さんご自身のヒット曲「夏色のナンシー」のラテンカバーが採用されたり、Nando Boom,Hisatomi,DJ Ricky Lunaによる人気曲「Todo El Mundo」では、大阪のレゲエアーティストHISATOMI氏の日本語ラップがフィーチャーされています（マジで名曲）。</p>
-                このような背景からか、J-POPに対して長年K-POPの採用曲が著しく少なかったのですが、最近では公式曲のカテゴリからJ-POPが消え、K-POPが新設されています。
-              
-
+                <p class="leading-relaxed mt-4">このような背景からか、J-POPに対して長年K-POPの採用曲が著しく少なかったのですが、最近では公式曲のカテゴリからJ-POPが消え、K-POPが新設されています。</p>
               </div>
               <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
                 <h4 class="font-bold text-lg text-slate-800 mb-2">どうでもいい話</h4>
@@ -158,7 +159,6 @@ const breadcrumbItems = [
           
           {/* SUZU */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
             <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
               <Image src={profileSuzu} alt="メインインストラクター SUZU" class="absolute inset-0 w-full h-full object-cover" />
             </div>
@@ -182,7 +182,6 @@ const breadcrumbItems = [
 
           {/* NIKU */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
             <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
               <Image src={profileNiku} alt="運営マネージャー NIKU" class="absolute inset-0 w-full h-full object-cover" />
             </div>
@@ -206,7 +205,6 @@ const breadcrumbItems = [
 
           {/* SHO */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            {/* w-fullを追加、Imageにabsolute inset-0を付与して完全にフィッティング */}
             <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
               <Image src={profileSho} alt="サブインストラクター SHO" class="absolute inset-0 w-full h-full object-cover" />
             </div>
@@ -232,28 +230,96 @@ const breadcrumbItems = [
       </section>
 
       {/* 地域とのつながりと実績 */}
-      <section class="bg-white rounded-2xl shadow-sm p-8 md:p-12 mb-16 border-t-4 border-indigo-500">
-        <div class="text-center mb-8">
-          <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">実績と社会貢献</span>
-          <h2 class="text-2xl md:text-3xl font-bold text-slate-800">地域に開かれたコミュニティとして</h2>
+      <section class="mb-16">
+        <div class="bg-white rounded-2xl shadow-sm p-8 md:p-12 border-t-4 border-indigo-500">
+          <div class="text-center mb-8">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">実績と社会貢献</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800">地域に開かれたコミュニティとして</h2>
+          </div>
+          
+          <p class="text-slate-700 text-lg leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+            地域の公共体育館での定期レッスンのほか、「かんなみ猫おどり」などの地元イベントへの参加、小学校ダンスクラブの無料指導、高齢者施設や障害者団体様向けのボランティア活動も積極的に行っています。
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+              <h4 class="font-bold text-indigo-900 mb-2">💸 参加しやすい価格設定</h4>
+              <p class="text-slate-700 text-sm leading-relaxed">
+                学生の参加費を無料、大人の参加費を地域最安値の500円にしているのも、地域の方々が無理なく続けられる居場所でありたいという想いからです。
+              </p>
+            </div>
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+              <h4 class="font-bold text-indigo-900 mb-2">🎓 インストラクターの輩出</h4>
+              <p class="text-slate-700 text-sm leading-relaxed">
+                10年以上の活動歴を持つ「ズンとも」からは、何名ものサークルメンバーさんが資格を取得し、独立して各地のスポーツジムやサークルで活躍しています。
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <p class="text-slate-700 text-lg leading-relaxed mb-6 text-center max-w-3xl mx-auto">
-          地域の公共体育館での定期レッスンのほか、「かんなみ猫おどり」などの地元イベントへの参加、小学校ダンスクラブの無料指導、高齢者施設や障害者団体様向けのボランティア活動も積極的に行っています。
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-            <h4 class="font-bold text-indigo-900 mb-2">💸 参加しやすい価格設定</h4>
-            <p class="text-slate-700 text-sm leading-relaxed">
-              学生の参加費を無料、大人の参加費を地域最安値の500円にしているのも、地域の方々が無理なく続けられる居場所でありたいという想いからです。
+
+        {/* 特記事項：出張レッスン・自治体様向け実績 */}
+        <div class="mt-10 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 md:p-8 border border-emerald-100 shadow-sm space-y-8">
+          
+          {/* ヘッダー部分 */}
+          <div class="border-b border-emerald-200 pb-4">
+            <h3 class="text-xl md:text-2xl font-bold text-teal-800 flex items-center gap-2">
+              <span class="text-2xl">💡</span> 出張レッスン・自治体イベントの講師依頼について
+            </h3>
+            <p class="text-teal-700 mt-2 font-medium">
+              ズンともでは、障害者サポート団体様からのご依頼や、自治体・行政の健康づくり企画など、地域に根ざした出張レッスンを積極的に承っております。
             </p>
           </div>
-          <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-            <h4 class="font-bold text-indigo-900 mb-2">🎓 インストラクターの輩出</h4>
-            <p class="text-slate-700 text-sm leading-relaxed">
-              10年以上の活動歴を持つ「ズンとも」からは、何名ものサークルメンバーさんが資格を取得し、独立して各地のスポーツジムやサークルで活躍しています。
-            </p>
+
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            {/* 左側：テキストエリア */}
+            <div class="md:w-1/2 space-y-6">
+              
+              {/* 行政・自治体向けのSEO対策ブロック */}
+              <div>
+                <h4 class="font-bold text-teal-900 mb-2 border-l-4 border-teal-500 pl-2">🏢 自治体・行政の企画担当者様へ</h4>
+                <p class="text-slate-700 leading-relaxed text-sm mb-3">
+                  地域の健康増進イベントや、長期休暇中のレクリエーション企画の講師をお探しではありませんか？<br />
+                  対象者の年齢や体力、企画の趣旨に合わせた専用プログラムをご提案いたします。
+                </p>
+                <ul class="text-sm text-slate-700 space-y-2 bg-white p-4 rounded-lg border border-teal-100">
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-500 font-bold">✓</span>
+                    <span><strong>夏休みなどの長期休暇企画：</strong><br />親子で一緒に汗を流せる、楽しくてカンタンなファミリー向けダンス教室</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-500 font-bold">✓</span>
+                    <span><strong>健康づくり・運動不足解消：</strong><br />メタボリックシンドローム対策など、運動習慣のない中年男性でも無理なく楽しく続けられる健康エクササイズ</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 障害者サポート団体様・福祉施設様向けブロック */}
+              <div>
+                <h4 class="font-bold text-teal-900 mb-2 border-l-4 border-teal-500 pl-2">🤝 福祉施設・サポート団体様へ</h4>
+                <p class="text-slate-700 leading-relaxed text-sm">
+                  2026年3月には、「手をつなぐ育成会静岡県東部地区連合会」様主催の『ふれあい交流会』（会場：サンウェルぬまづ）にお招きいただき、約80名の皆さまと30分の楽しいダンスタイムを共有しました。車椅子の方でも安全に参加できる内容で構成いたします。
+                </p>
+              </div>
+
+              <p class="text-teal-700 font-bold text-center bg-teal-100/50 py-3 rounded-lg">
+                ご予算・規模に合わせて対応いたします。お気軽にご相談ください！
+              </p>
+            </div>
+            
+            {/* 右側：写真エリア */}
+            <div class="md:w-1/2 w-full">
+              <div class="rounded-xl overflow-hidden shadow-md border-2 border-white">
+                <Image 
+                  src={volunteerImg} 
+                  alt="サンウェルぬまづでのふれあい交流会 出張レッスンの様子 親子や中高年の運動不足解消にも" 
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-slate-500 mt-2 text-center leading-relaxed">
+                ▲ 手をつなぐ育成会様『ふれあい交流会』でのレッスン風景<br />
+                （約80名参加 / 会場：サンウェルぬまづ）
+              </p>
+            </div>
           </div>
         </div>
       </section>

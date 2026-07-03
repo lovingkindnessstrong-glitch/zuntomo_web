@@ -2,6 +2,13 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// ゴールド用のヒーロー画像をインポート
+import goldHero from '../../../assets/images/activities/gold/gold-hero-1200.webp';
+
+// 出張レッスンの画像をインポート
+import volunteerImg from '../../../assets/images/activities/gold/volunteer.webp';
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -10,17 +17,26 @@ const breadcrumbItems = [
 ];
 ---
 
-<Layout title="ゴールドクラス（S-DANCE GOLD） | ZUNTOMO">
+<Layout title="ゴールドクラス（S-DANCE™ GOLD） | ZUNTOMO">
   <main class="bg-gradient-to-b from-blue-50 to-white">
     
     {/* ① ヒーローエリア */}
-    <section class="relative w-full h-96 bg-gradient-to-r from-blue-500 to-blue-600 flex flex-col items-center justify-center text-center px-4">
-      <div class="absolute inset-0 bg-blue-600 opacity-75"></div>
+    <section class="relative w-full h-96 overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像 */}
+      <Image 
+        src={goldHero} 
+        alt="ゴールドクラスの様子" 
+        class="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      {/* 青みを無くし、写真本来の暖かさを活かすシンプルな黒の半透明に変更 */}
+      <div class="absolute inset-0 bg-black/50"></div>
+      
+      {/* テキストコンテンツ */}
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
           めちゃめちゃ楽しく運動しよう！
         </h1>
-        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-md">
+        <p class="text-lg md:text-xl text-yellow-100 max-w-3xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           誰もが知っているあの曲で。心も体も、そして脳もイキイキ若返る特別な60分。
         </p>
       </div>
@@ -37,17 +53,17 @@ const breadcrumbItems = [
         </h2>
         <div class="bg-blue-50 rounded-lg p-6 shadow-md">
           <p class="text-gray-700 text-lg leading-relaxed mb-4">
-            インストラクター自身の<strong class="text-red-600">半身不随（脳出血）の経験</strong>から、
-            「シニアやハンディキャップがある方でも心から楽しめる運動指導をしたい」という強い想いでスタートしました。
+            インストラクター自身の「高齢の母親をなんとか運動させたい」と、母親の「運動はやりたくない」から、
+            シニアの方やハンディキャップがある方でも「心から楽しめるような運動指導をしたい！」という強い想いでスタートしました。
           </p>
           <p class="text-gray-700 text-lg leading-relaxed mb-4">
-            日本の皆様に本当に心から楽しんでいただくため、<strong class="text-blue-700">みんなが知っていて口ずさめる流行曲やポップス</strong>を中心に、
-            独自のプログラム「<span class="font-bold text-yellow-600">S-DANCE GOLD</span>」を開発しました。
+            どんな年齢でも心から楽しんでいただくため、<strong class="text-blue-700">みんなが知っていて口ずさめる流行曲やポップス</strong>を中心に、
+            独自のプログラム「<span class="font-bold text-yellow-600">S-DANCE™ GOLD</span>」を開発しました。
           </p>
           <p class="text-gray-700 text-lg leading-relaxed">
             運動だけでなく、<strong class="text-purple-600">「シナプソロジー®️（脳トレ）」</strong>や
             <strong class="text-orange-600">「バランスボール」</strong>を取り入れ、
-            心身機能の維持・向上と脳の活性化を同時に図ります。
+            心身機能の維持向上と、脳の活性化を同時に図っています。
           </p>
         </div>
       </section>
@@ -112,22 +128,46 @@ const breadcrumbItems = [
             </div>
             <div class="bg-white rounded-lg p-5 shadow-md">
               <h3 class="text-gray-800 font-bold text-xl mb-2">🎫 参加方法</h3>
-              <p class="text-xl font-bold text
-              <p class="text-blue-100">13時のドアオープン以降、直接現地にお越しください</p>
+              <p class="text-2xl font-bold text-blue-700">事前予約不要</p>
+              <p class="text-gray-700">13時のドアオープン以降、直接現地にお越しください</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded-lg">
-          <p class="font-bold text-lg mb-2">💡 特記事項</p>
-          <p>障害者サポート団体様などからの<strong>出張レッスン依頼も承っております</strong>。お気軽にご相談ください。</p>
+        {/* 出張レッスンの実績（B2C向けの安心感アピールとして再構成） */}
+        <div class="bg-white border-2 border-blue-100 rounded-xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+          <div class="md:w-1/2">
+            <h4 class="font-bold text-blue-800 text-xl mb-4 flex items-center gap-2">
+              <span class="text-2xl">🤝</span> 安心・安全なプログラム設計
+            </h4>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              S-DANCE™ GOLDは、参加される方の年齢や体力、車椅子等の状況に合わせた安全なプログラムです。
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              その安全性・楽しさが評価され、障害者サポート団体様や高齢者施設様、親子レッスンから中年男性のメタボ対策まで、出張レッスンも多数承っております。運動に不安がある方も、どうぞ安心してご参加ください。
+            </p>
+            <p class="text-sm text-gray-500">
+              ※自治体・施設担当者様向けの出張依頼については、<a href="/about/" class="text-blue-600 underline hover:text-blue-800 transition-colors">運営者紹介ページ</a>をご覧ください。
+            </p>
+          </div>
+          <div class="md:w-1/2 w-full">
+            <div class="rounded-xl overflow-hidden shadow-md border-2 border-white">
+              <Image 
+                src={volunteerImg} 
+                alt="高齢者施設やサポート団体様での出張レッスンの様子" 
+                class="w-full h-auto object-cover"
+              />
+            </div>
+            <p class="text-xs text-gray-500 mt-2 text-center">
+              ▲ 約80名の障害者のみなさまと楽しくレクリエーション。
+          </div>
         </div>
       </section>
 
       {/* ⑤ 特徴セクション */}
       <section class="mb-16">
         <h2 class="text-3xl font-bold text-blue-800 border-b-4 border-yellow-400 pb-3 mb-6">
-          ✨ S-DANCE GOLDの3つの特徴
+          ✨ S-DANCE™ GOLDの3つの特徴
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-lg p-6 shadow-md border-t-4 border-yellow-500">

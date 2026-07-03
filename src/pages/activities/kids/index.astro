@@ -2,6 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { Image } from 'astro:assets';
+
+// キッズダンス用のヒーロー画像をインポート
+import kidsHero from '../../../assets/images/activities/kids/kids-hero-1280.webp';
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -13,19 +17,28 @@ const breadcrumbItems = [
 <Layout title="キッズクラス | ZUNTOMO">
   <main class="bg-gradient-to-b from-yellow-50 via-green-50 to-white">
     
-    {/* ① ヒーローエリア */}
-    <section class="relative w-full h-96 bg-gradient-to-r from-yellow-400 via-green-400 to-light-blue-400 flex flex-col items-center justify-center text-center px-4">
-      <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-green-500 opacity-90"></div>
+{/* ① ヒーローエリア */}
+    <section class="relative w-full h-96 overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像： 縦の位置をパーセントで微調整（例: 20%） */}
+      <Image 
+        src={kidsHero} 
+        alt="キッズダンスレッスンの様子" 
+        class="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+      />
+      {/* 半透明オーバーレイ（キッズの明るい雰囲気を残すため薄めの40%） */}
+      <div class="absolute inset-0 bg-black/40"></div>
+      
+      {/* テキストコンテンツ */}
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
           お子様の基礎能力を伸ばす、楽しいダンスレッスン
         </h1>
-        <p class="text-lg md:text-xl text-yellow-50 max-w-3xl drop-shadow-md">
+        <p class="text-lg md:text-xl text-yellow-50 max-w-3xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           初めてのダンス習い事にぴったり！「基礎」と「楽しさ」を育む教室
         </p>
       </div>
     </section>
-
+        
     <Breadcrumb items={breadcrumbItems} />
 
     <div class="container mx-auto px-4 py-12 max-w-6xl">
