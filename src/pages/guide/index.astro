@@ -2,10 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { Image } from 'astro:assets';
 
-// 初めての方へページ用のヒーロー画像をインポート
-import guideHero from '../../assets/images/guide/Friendly-Reception-ZUMBA.webp';
+// 💡 import文は削除しました！
 
 const breadcrumbItems = [
   { label: 'ホーム', href: '/' },
@@ -19,9 +17,9 @@ const breadcrumbItems = [
     {/* ヒーローエリア */}
     <section class="relative w-full h-[400px] overflow-hidden flex flex-col items-center justify-center text-center px-4">
       
-      {/* 背景画像：顔が見切れないよう、上から20%を基準に表示（object-[center_20%]） */}
-      <Image 
-        src={guideHero} 
+      {/* 💡 Astroの<Image>ではなく標準の<img>を使い、直接 /assets/... を指定しました */}
+      <img 
+        src="/assets/images/guide/Friendly-Reception-ZUMBA.webp" 
         alt="初心者でも安心！予約不要で参加できるズンともの受付の様子" 
         class="absolute inset-0 h-full w-full object-cover object-[center_20%]"
       />

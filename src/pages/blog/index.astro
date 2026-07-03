@@ -1,0 +1,68 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+// 🤖 メンテナンス性MAX：フォルダ内の全Markdownを自動取得し、日付の新しい順に並び替え！
+const allPosts = Object.values(import.meta.glob('./**/*.md', { eager: true }));
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>活動レポート・ブログ | ズンとも</title>
+    <meta name="description" content="ズンとも（ZUNTOMO）の最新イベントレポートや活動をお届けするブログ一覧です。" />
+    
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  </head>
+  <body class="bg-[#fdfbf7] text-slate-900 font-sans flex flex-col min-h-screen">
+    <Header />
+
+    <div class="pt-24 pb-20 flex-grow">
+      <main class="mx-auto max-w-5xl px-4 sm:px-6">
+
+        <header class="mb-12 text-center">
+          <h1 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">活動レポート・ブログ</h1>
+          <p class="text-slate-600">ズンともの日々の活動やイベント出演の様子をお届けします！</p>
+        </header>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPosts.map((post) => (
+            <article class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col border border-slate-100 group">
+              <a href={post.url} class="block aspect-video overflow-hidden" aria-label={`${post.frontmatter.title}の記事を読む`}>
+                <img
+                  src={post.frontmatter.heroImage}
+                  alt="" 
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </a>
+              
+              <div class="p-6 flex flex-col flex-grow">
+                <time datetime={post.frontmatter.date} class="text-sm font-medium text-teal-600 mb-2">
+                  🗓 {post.frontmatter.date}
+                </time>
+                <h2 class="text-xl font-bold text-slate-800 mb-3 leading-tight">
+                  <a href={post.url} class="hover:text-teal-700 transition-colors">
+                    {post.frontmatter.title}
+                  </a>
+                </h2>
+                <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-grow">
+                  {post.frontmatter.description}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </main>
+    </div>
+
+    <Footer />
+  </body>
+</html>

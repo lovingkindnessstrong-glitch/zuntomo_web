@@ -4,8 +4,8 @@ const sitemapLinks = [
   { href: '/about/', label: 'ABOUT (運営者紹介)' },
   { href: '/guide/', label: 'GUIDE (初めての方へ)' },
   { href: '/#lesson', label: 'LESSON (クラス一覧)' },
-  { href: '#', label: 'NEWS (お知らせ)' },
-  { href: '#', label: 'LIBRARY (活動記録)' },
+  // 💡 NEWS と LIBRARY を統合・整理し、BLOGへの導線に置き換えました
+  { href: '/blog/', label: 'BLOG (活動レポート)' },
 ];
 
 const activityLinks = [
@@ -21,10 +21,8 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
 
 <footer class="border-t-4 border-slate-200 bg-slate-50">
   <div class="mx-auto max-w-6xl px-6 py-12 sm:px-8">
-    <!-- メインコンテンツグリッド -->
     <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
       
-      <!-- Column 1: Circle Info (ローカルSEO強化) -->
       <div class="flex flex-col">
         <h2 class="text-2xl font-bold text-slate-900 tracking-wide">
           ダンスサークル<br />「ズンとも」
@@ -47,7 +45,6 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
         </div>
       </div>
 
-      <!-- Column 2: Sitemap (内部リンク強化) -->
       <div>
         <h3 class="text-lg font-bold text-slate-800 border-l-4 border-emerald-400 pl-2">
           ナビゲーション
@@ -76,7 +73,6 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
         </nav>
       </div>
 
-      <!-- Column 3: Activities -->
       <div>
         <h3 class="text-lg font-bold text-slate-800 border-l-4 border-blue-400 pl-2">
           レッスン一覧
@@ -98,7 +94,6 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
       </div>
     </div>
 
-    <!-- Copyright -->
     <div class="mt-12 border-t border-slate-200 pt-8 text-center text-xs text-slate-500">
       © 2026 ダンスサークル「ズンとも」. All rights reserved.
     </div>
