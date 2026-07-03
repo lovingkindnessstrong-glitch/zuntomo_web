@@ -4,6 +4,9 @@ import Button from '../../components/Button.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { Image } from 'astro:assets';
 
+// アバウト用のヒーロー画像をインポート
+import aboutHero from '../../assets/images/about/About-ZUNTOMO-ZUMBA.webp';
+
 // プロフィール画像のインポート
 import profileSuzu from '../../assets/images/about/profile_suzu.webp';
 import profileNiku from '../../assets/images/about/profile_niku.webp';
@@ -22,18 +25,29 @@ const breadcrumbItems = [
   <main class="bg-slate-50">
     
     {/* ヒーローエリア */}
-    <section class="bg-gradient-to-br from-emerald-500 to-teal-600 py-20 px-4 text-center">
-      <div class="container mx-auto max-w-4xl">
-        <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-sm">
+    <section class="relative w-full h-[400px] overflow-hidden flex flex-col items-center justify-center text-center px-4">
+      {/* 背景画像 */}
+      <Image 
+        src={aboutHero} 
+        alt="沼津・三島で活動するZUMBAサークル「ズンとも」のアットホームな受付風景" 
+        class="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      {/* 写真の温かみを残しつつテキストを浮き立たせるための黒半透明オーバーレイ */}
+      <div class="absolute inset-0 bg-black/50"></div>
+      
+      {/* テキストコンテンツ */}
+      <div class="relative z-10 max-w-4xl mx-auto mt-8">
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
           運営者紹介・サークル理念
         </h1>
-        <p class="text-lg md:text-xl text-emerald-50 leading-relaxed font-medium">
+        <p class="text-lg md:text-xl text-emerald-50 leading-relaxed font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           ダンスサークル「ズンとも」は、沼津・三島・裾野・函南など<br class="hidden md:block" />静岡県東部を中心に活動するコミュニティです。
         </p>
       </div>
     </section>
 
     <div class="container mx-auto px-4 py-8 max-w-5xl">
+      
       <Breadcrumb items={breadcrumbItems} />
 
       {/* リード文 */}
@@ -159,8 +173,9 @@ const breadcrumbItems = [
           
           {/* SUZU */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
-              <Image src={profileSuzu} alt="メインインストラクター SUZU" class="absolute inset-0 w-full h-full object-cover" />
+            {/* 高さを可変(aspect-[4/3])にし、画像の基準位置を上(object-top)に変更 */}
+            <div class="aspect-[4/3] overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileSuzu} alt="メインインストラクター SUZU" class="absolute inset-0 w-full h-full object-cover object-top" />
             </div>
             <div class="p-6 flex-grow">
               <div class="mb-4">
@@ -182,8 +197,9 @@ const breadcrumbItems = [
 
           {/* NIKU */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
-              <Image src={profileNiku} alt="運営マネージャー NIKU" class="absolute inset-0 w-full h-full object-cover" />
+            {/* 高さを可変(aspect-[4/3])にし、画像の基準位置を上(object-top)に変更 */}
+            <div class="aspect-[4/3] overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileNiku} alt="運営マネージャー NIKU" class="absolute inset-0 w-full h-full object-cover object-top" />
             </div>
             <div class="p-6 flex-grow">
               <div class="mb-4">
@@ -205,8 +221,9 @@ const breadcrumbItems = [
 
           {/* SHO */}
           <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-            <div class="h-64 overflow-hidden bg-slate-100 relative w-full">
-              <Image src={profileSho} alt="サブインストラクター SHO" class="absolute inset-0 w-full h-full object-cover" />
+            {/* 高さを可変(aspect-[4/3])にし、画像の基準位置を上(object-top)に変更 */}
+            <div class="aspect-[4/3] overflow-hidden bg-slate-100 relative w-full">
+              <Image src={profileSho} alt="サブインストラクター SHO" class="absolute inset-0 w-full h-full object-cover object-top" />
             </div>
             <div class="p-6 flex-grow">
               <div class="mb-4">
@@ -332,7 +349,9 @@ const breadcrumbItems = [
         <p class="text-emerald-50 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
           「運動不足を解消したい」「新しく何かを始めたい」きっかけは何でも構いません。いつでも温かくお迎えします！
         </p>
-        <Button href="#" text="LINEで今すぐ相談・体験申込" style="primary" class="bg-white text-teal-600 hover:bg-slate-50 shadow-md text-lg px-8 py-3" />
+        <a href="#" class="inline-flex items-center justify-center bg-white text-teal-600 font-bold hover:bg-slate-50 shadow-md text-lg px-8 py-3 rounded-full transition-all hover:scale-105">
+          LINEで今すぐ相談・体験申込
+        </a>
       </section>
 
     </div>
