@@ -17,7 +17,21 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <!-- 1. SVG（モダンブラウザ用・最優先） -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  
+    <!-- 2. ICO（古いブラウザ用の保険） -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  
+    <!-- 3. Apple Touch Icon（iOSのホーム画面追加用） -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  
+    <!-- 4. PWAマニフェスト（Android等のホーム画面・ステータスバー用） -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#111827" />
+  
   </head>
+
   <body class="bg-[#fdfbf7] text-slate-900">
     <Header />
     <slot />
