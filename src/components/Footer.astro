@@ -1,9 +1,11 @@
 ---
 const sitemapLinks = [
   { href: '/', label: 'HOME' },
-  { href: '/#lesson', label: 'LESSON' },
-  { href: '#', label: 'NEWS' },
-  { href: '#', label: 'LIBRARY' },
+  { href: '/about/', label: 'ABOUT (運営者紹介)' },
+  { href: '/guide/', label: 'GUIDE (初めての方へ)' },
+  { href: '/#lesson', label: 'LESSON (クラス一覧)' },
+  { href: '#', label: 'NEWS (お知らせ)' },
+  { href: '#', label: 'LIBRARY (活動記録)' },
 ];
 
 const activityLinks = [
@@ -14,26 +16,40 @@ const activityLinks = [
   { href: '/activities/neko-odori/', label: '猫おどり部' },
 ];
 
-const LINE_URL = 'https://line.me/R/ti/p/@zuntomo';
+const LINE_URL = 'https://lin.ee/8Rjc7Jd';
 ---
 
-<footer class="border-t border-slate-200 bg-white">
+<footer class="border-t-4 border-slate-200 bg-slate-50">
   <div class="mx-auto max-w-6xl px-6 py-12 sm:px-8">
     <!-- メインコンテンツグリッド -->
     <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
-      <!-- Column 1: Circle Info -->
+      
+      <!-- Column 1: Circle Info (ローカルSEO強化) -->
       <div class="flex flex-col">
-        <h2 class="text-2xl font-bold text-slate-900">
+        <h2 class="text-2xl font-bold text-slate-900 tracking-wide">
           ダンスサークル<br />「ズンとも」
         </h2>
-        <p class="mt-4 text-base leading-7 text-slate-600">
-          誰もが自分のペースで楽しめる、あなたのためのダンスコミュニティ。
+        <p class="mt-4 text-sm leading-relaxed text-slate-600">
+          静岡県東部（沼津・三島・函南など）を中心に活動する、初心者歓迎のZUMBA®・ダンスコミュニティです。<br />
+          誰もが自分のペースで楽しめる、あなたのための居場所です。
         </p>
+        
+        {/* フッター用のLINEボタン（UX強化） */}
+        <div class="mt-6">
+          <a 
+            href={LINE_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center justify-center bg-[#06C755] text-white font-bold hover:bg-[#05b34c] shadow-sm text-sm px-6 py-3 rounded-full transition-all"
+          >
+            LINE公式アカウントはこちら
+          </a>
+        </div>
       </div>
 
-      <!-- Column 2: Sitemap -->
+      <!-- Column 2: Sitemap (内部リンク強化) -->
       <div>
-        <h3 class="text-lg font-semibold text-slate-900">
+        <h3 class="text-lg font-bold text-slate-800 border-l-4 border-emerald-400 pl-2">
           ナビゲーション
         </h3>
         <nav class="mt-6">
@@ -42,16 +58,16 @@ const LINE_URL = 'https://line.me/R/ti/p/@zuntomo';
               <li>
                 <a
                   href={href}
-                  class="text-base text-slate-600 transition hover:text-emerald-600 hover:underline"
+                  class="text-sm font-medium text-slate-600 transition hover:text-emerald-600 hover:underline"
                 >
                   {label}
                 </a>
               </li>
             ))}
-            <li class="pt-2">
+            <li class="pt-4 mt-4 border-t border-slate-200">
               <a
                 href="/privacy/"
-                class="text-base text-slate-600 transition hover:text-emerald-600 hover:underline"
+                class="text-xs text-slate-500 transition hover:text-emerald-600 hover:underline"
               >
                 プライバシーポリシー
               </a>
@@ -62,7 +78,7 @@ const LINE_URL = 'https://line.me/R/ti/p/@zuntomo';
 
       <!-- Column 3: Activities -->
       <div>
-        <h3 class="text-lg font-semibold text-slate-900">
+        <h3 class="text-lg font-bold text-slate-800 border-l-4 border-blue-400 pl-2">
           レッスン一覧
         </h3>
         <nav class="mt-6">
@@ -71,7 +87,7 @@ const LINE_URL = 'https://line.me/R/ti/p/@zuntomo';
               <li>
                 <a
                   href={href}
-                  class="text-base text-slate-600 transition hover:text-emerald-600 hover:underline"
+                  class="text-sm font-medium text-slate-600 transition hover:text-blue-600 hover:underline"
                 >
                   {label}
                 </a>
@@ -83,7 +99,7 @@ const LINE_URL = 'https://line.me/R/ti/p/@zuntomo';
     </div>
 
     <!-- Copyright -->
-    <div class="mt-12 border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
+    <div class="mt-12 border-t border-slate-200 pt-8 text-center text-xs text-slate-500">
       © 2026 ダンスサークル「ズンとも」. All rights reserved.
     </div>
   </div>

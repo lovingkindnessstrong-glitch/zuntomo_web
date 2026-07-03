@@ -19,14 +19,17 @@ const navLinks = [
   { href: '#', label: 'NEWS' },
   { href: '#', label: 'LIBRARY' },
 ];
+
+// LINEのURLを変数として管理
+const LINE_URL = 'https://lin.ee/8Rjc7Jd';
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 shadow-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1 md:px-6">
     
-    {/* ▼ 修正箇所：Tailwindクラス（h-16 md:h-20 = スマホで高さ64px、PCで80px）でサイズを直接指定 */}
+    {/* ロゴ部分：alt属性でローカルSEOを強化 */}
     <a href="/" class="flex items-center transition-opacity hover:opacity-80" aria-label="ズンともホーム">
-      <img src={logoImage.src} alt="ズンとも" class="h-16 md:h-20 w-auto" />
+      <img src={logoImage.src} alt="沼津・三島のダンスサークル ズンとも" class="h-16 md:h-20 w-auto" />
     </a>
 
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">
@@ -56,8 +59,11 @@ const navLinks = [
     </nav>
 
     <div class="flex items-center gap-2 md:gap-3">
+      {/* PC版 LINEボタン：URL反映と別タブで開く設定を追加 */}
       <a
-        href="#"
+        href={LINE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex items-center justify-center rounded-full bg-[#06C755] px-3 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 md:px-5"
       >
         <svg class="h-5 w-5 md:hidden" viewBox="0 0 24 24" fill="currentColor" aria-label="LINE申込">
@@ -103,8 +109,12 @@ const navLinks = [
           </a>
         )
       ))}
+      
+      {/* スマホ版 LINEボタン：URL反映と別タブで開く設定を追加 */}
       <a
-        href="#"
+        href={LINE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-[#06C755] px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
       >
         LINE申込
