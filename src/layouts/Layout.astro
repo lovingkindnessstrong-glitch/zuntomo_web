@@ -5,36 +5,49 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
-  description?: string; // Add description as an optional prop
+  description?: string;
+  image?: string; // OGP画像用に追加
 }
 
-const { title, description } = Astro.props;
+// デフォルト値を設定
+const { 
+  title, 
+  description = "静岡県東部（沼津・三島・函南など）を中心に活動する、初心者歓迎のZUMBA®・ダンスコミュニティ「ズンとも」です。",
+  image = "/assets/images/common/default-ogp.webp" // デフォルトのOGP画像
+} = Astro.props;
+
+// 現在のページの絶対URLを生成（Canonical・OGP用）
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>{title}</title>
-    {description && <meta name="description" content={description} />}
-    <!-- 1. SVG（モダンブラウザ用・最優先） -->
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  
-    <!-- 2. ICO（古いブラウザ用の保険） -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
-  
-    <!-- 3. Apple Touch Icon（iOSのホーム画面追加用） -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  
-    <!-- 4. PWAマニフェスト（Android等のホーム画面・ステータスバー用） -->
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#111827" />
-  
   </head>
 
-  <body class="bg-[#fdfbf7] text-slate-900">
+  <body class="bg-[#fdfbf7] text-slate-900 flex flex-col min-h-screen">
     <Header />
-    <slot />
+    <main class="flex-grow">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

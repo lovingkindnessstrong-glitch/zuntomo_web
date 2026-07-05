@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import remarkBreaks from 'remark-breaks'; 
 
-// https://astro.build/config
 export default defineConfig({
+  site: 'https://zuntomo.com', 
   vite: {
     plugins: [tailwindcss()]
   },
