@@ -3,36 +3,36 @@ import Layout from '../layouts/Layout.astro';
 import activities from '../data/activities.json';
 import { Image } from 'astro:assets';
 
-// 再配置したトップページ用のヒーロー画像をインポート
 import heroImage from '../assets/images/home/hero.png';
 
-// カテゴリIDごとのカラースキーム
 const colorSchemes: Record<string, { bg: string; icon: string; button: string; hover: string }> = {
   standard: { bg: 'bg-emerald-100', icon: 'text-emerald-600', button: 'bg-emerald-500', hover: 'hover:bg-emerald-600' },
   kids: { bg: 'bg-pink-100', icon: 'text-pink-600', button: 'bg-pink-500', hover: 'hover:bg-pink-600' },
   gold: { bg: 'bg-amber-100', icon: 'text-amber-600', button: 'bg-amber-500', hover: 'hover:bg-amber-600' },
   'neko-odori': { bg: 'bg-purple-100', icon: 'text-purple-600', button: 'bg-purple-500', hover: 'hover:bg-purple-600' },
+  salsa: { bg: 'bg-red-100', icon: 'text-red-600', button: 'bg-red-500', hover: 'hover:bg-red-600' },
 };
 
-// アイコン SVG の定義
 const icons: Record<string, string> = {
   standard: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z',
   kids: 'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z',
   gold: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
   'neko-odori': 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+  salsa: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
 };
 ---
 
 <Layout title="ダンスサークル「ズンとも」| 沼津・三島の大人向けZUMBA・キッズダンス教室">
-  <section class="hero-section relative h-96 w-full overflow-hidden md:h-[500px]">
-    {/* AstroのImageコンポーネントに変更し、インポートした画像ソースをマージ */}
+  <section class="relative h-96 w-full overflow-hidden md:h-[500px]">
     <Image 
       src={heroImage} 
       alt="ダンスサークル「ズンとも」のレッスン風景" 
-      class="hero-image absolute inset-0 h-full w-full"
-    />
-    <div class="hero-overlay absolute inset-0"></div>
-    <div class="hero-content absolute inset-0 flex items-center justify-center px-4 sm:px-6">
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+      />
+    <div class="absolute inset-0 bg-black/35"></div>
+    <div class="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6">
       <h1 class="text-center text-2xl font-bold text-white drop-shadow-lg sm:text-3xl md:text-5xl lg:text-6xl max-w-lg sm:max-w-2xl">
         ダンスサークル<br />「ズンとも」へようこそ
       </h1>
@@ -45,7 +45,7 @@ const icons: Record<string, string> = {
         このサイトについて
       </h2>
       <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-        公式サイトのホームです。大人向けクラス、キッズクラス、運営情報、活動報告、動画アーカイブへの案内を掲載しています。
+        今年で活動10周年！静岡県東部のダンスサークル「ズンとも（ZUNTOMO）」です。お子様からシルバーまで、誰でも「かんたん、たのしい、こうかてき」をモットーに活動しています。
       </p>
     </section>
 
@@ -61,8 +61,9 @@ const icons: Record<string, string> = {
         {activities.map((activity) => {
           const colors = colorSchemes[activity.id] || colorSchemes.standard;
           const iconPath = icons[activity.id] || icons.standard;
+          
           return (
-            <article class="class-card rounded-lg border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md hover:-translate-y-1">
+            <article class="flex flex-col rounded-lg border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-emerald-500/30 hover:shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
               <div class={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full ${colors.bg}`}>
                 <svg class={`h-6 w-6 ${colors.icon}`} fill="currentColor" viewBox="0 0 24 24">
                   <path d={iconPath}/>
@@ -94,29 +95,3 @@ const icons: Record<string, string> = {
     </section>
   </main>
 </Layout>
-
-<style>
-  .hero-image {
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .hero-overlay {
-    background-color: rgba(0, 0, 0, 0.35);
-  }
-
-  .hero-content {
-    z-index: 10;
-  }
-
-  .class-card {
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .class-card:hover {
-    border-color: rgba(16, 185, 129, 0.3);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-</style>

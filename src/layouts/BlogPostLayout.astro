@@ -1,102 +1,82 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-import suzuProfile from '../assets/lessons/instructors/suzu-instructor-profile-400.webp';
+// 💡 Layoutコンポーネントを読み込みます
+import Layout from './Layout.astro';
 
 const { frontmatter } = Astro.props;
 ---
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} | ズンとも</title>
-    <meta name="description" content={frontmatter.description} />
-    
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#111827" />
-  </head>
-  <body class="bg-[#fdfbf7] text-slate-900 font-sans">
-    <Header />
-    
-    <!-- ヘッダーの被りを防ぐための上部余白（pt-24 ▶ pt-8） -->
-    <div class="pt-8 pb-16">
-      <main class="mx-auto max-w-3xl px-4 sm:px-6">
-        
-        <!-- 🧭 パンくずリスト -->
-        <nav class="text-sm text-slate-500 mb-6" aria-label="Breadcrumb">
-          <ol class="flex items-center flex-wrap gap-2">
-            <li><a href="/" class="hover:text-teal-700 transition-colors">ホーム</a></li>
-            <li><span class="text-slate-400">/</span></li>
-            <li><a href="/blog/" class="hover:text-teal-700 transition-colors">ブログ</a></li>
-            <li><span class="text-slate-400">/</span></li>
-            <li class="text-slate-900 font-medium truncate" aria-current="page">{frontmatter.title}</li>
-          </ol>
-        </nav>
 
-        <!-- 🖼 ヒーロー画像（PCでは本番環境ライクな横長に自動トリミング） -->
-        <div class="w-full aspect-video sm:aspect-[5/2] rounded-xl overflow-hidden mb-8 shadow-sm">
+{/* 💡 Layoutを呼び出し、OGP用のimageも渡します */}
+<Layout 
+  title={`${frontmatter.title} | ズンとも`}
+  description={frontmatter.description}
+  image={frontmatter.heroImage} 
+>
+
+  <div class="pt-8 pb-16 bg-[#fdfbf7]">
+    <main class="mx-auto max-w-3xl px-4 sm:px-6">
+      
+      <nav class="text-sm text-slate-500 mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center flex-wrap gap-2">
+          <li><a href="/" class="hover:text-teal-700 transition-colors">ホーム</a></li>
+          <li><span class="text-slate-400">/</span></li>
+          <li><a href="/blog/" class="hover:text-teal-700 transition-colors">ブログ</a></li>
+          <li><span class="text-slate-400">/</span></li>
+          <li class="text-slate-900 font-medium truncate" aria-current="page">{frontmatter.title}</li>
+        </ol>
+      </nav>
+
+      <div class="w-full aspect-video sm:aspect-[5/2] rounded-xl overflow-hidden mb-8 shadow-sm">
+        <img 
+          src={frontmatter.heroImage} 
+          alt={frontmatter.title} 
+          class="w-full h-full object-cover object-center"
+        />
+      </div>
+      
+      <header class="mb-10 border-b border-slate-200 pb-6">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-4 leading-tight text-slate-800">{frontmatter.title}</h1>
+        <p class="text-sm font-medium text-slate-500">
+          🗓 投稿日: <time datetime={frontmatter.date}>{frontmatter.date}</time>
+        </p>
+      </header>
+      
+      <article class="prose prose-slate prose-lg max-w-none 
+        prose-headings:text-slate-800 prose-headings:font-bold prose-headings:border-l-4 prose-headings:border-teal-600 prose-headings:pl-3
+        prose-a:text-teal-600 prose-a:font-medium hover:prose-a:text-teal-800
+        prose-img:rounded-xl prose-img:shadow-sm
+        prose-img:mb-0
+        mb-16">
+        <slot />
+      </article>
+      
+      <aside class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-100 mb-10">
+        <h3 class="text-lg font-bold mb-6 text-slate-800 border-b pb-2">この記事を書いた人・運営</h3>
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
           <img 
-            src={frontmatter.heroImage} 
-            alt={frontmatter.title} 
-            class="w-full h-full object-cover object-center"
+            src="/assets/lessons/instructors/suzu-instructor-profile-400.webp" 
+            alt="SUZU" 
+            class="w-24 h-24 rounded-full object-cover shadow-sm border-2 border-slate-50 shrink-0" 
           />
-        </div>
-        
-        <!-- 📝 記事タイトルエリア -->
-        <header class="mb-10 border-b border-slate-200 pb-6">
-          <h1 class="text-2xl sm:text-3xl font-bold mb-4 leading-tight text-slate-800">{frontmatter.title}</h1>
-          <p class="text-sm font-medium text-slate-500">
-            🗓 投稿日: <time datetime={frontmatter.date}>{frontmatter.date}</time>
-          </p>
-        </header>
-        
-        <!-- 📖 Markdown本文エリア（Typographyプラグインで自動スタイリング） -->
-        <!-- 見出しの色や下線、画像へのシャドウなどをプロクラス単位で自動付与しています -->
-        <article class="prose prose-slate prose-lg max-w-none 
-          prose-headings:text-slate-800 prose-headings:font-bold prose-headings:border-l-4 prose-headings:border-teal-600 prose-headings:pl-3
-          prose-a:text-teal-600 prose-a:font-medium hover:prose-a:text-teal-800
-          prose-img:rounded-xl prose-img:shadow-sm
-          prose-img:mb-0
-          mb-16">
-          <slot />
-        </article>
-        
-        <!-- 🎯 導線（CTA & プロフィール） -->
-        <aside class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-100 mb-10">
-          <h3 class="text-lg font-bold mb-6 text-slate-800 border-b pb-2">この記事を書いた人・運営</h3>
-          <div class="flex flex-col sm:flex-row gap-6 items-start">
-            <img 
-              src="/assets/lessons/instructors/suzu-instructor-profile-400.webp" 
-              alt="SUZU" 
-              class="w-24 h-24 rounded-full object-cover shadow-sm border-2 border-slate-50 shrink-0" 
-            />
-            <div>
-              <p class="font-bold text-lg text-slate-900 mb-2">ZUNTOMO（ズンとも）</p>
-              <p class="text-sm text-slate-600 mb-5 leading-relaxed">
-                静岡県東部で10年。インストラクター2名、マネージャー1名の体制で、安全で楽しいZUMBA®サークルを運営しています。初心者大歓迎です！
-              </p>
-              <a href="/about/" class="inline-flex justify-center items-center bg-teal-600 text-white text-sm font-bold px-6 py-3 rounded-full hover:bg-teal-700 transition-colors w-full sm:w-auto">
-                SUZUとサークルの詳細を見る
-              </a>
-            </div>
+          <div>
+            <p class="font-bold text-lg text-slate-900 mb-2">ZUNTOMO（ズンとも）</p>
+            <p class="text-sm text-slate-600 mb-5 leading-relaxed">
+              静岡県東部で10年。インストラクター2名、マネージャー1名の体制で、安全で楽しいZUMBA®サークルを運営しています。初心者大歓迎です！
+            </p>
+            <a href="/about/" class="inline-flex justify-center items-center bg-teal-600 text-white text-sm font-bold px-6 py-3 rounded-full hover:bg-teal-700 transition-colors w-full sm:w-auto">
+              SUZUとサークルの詳細を見る
+            </a>
           </div>
-        </aside>
-
-        <!-- 🔙 ブログ一覧へ戻る -->
-        <div class="text-center">
-          <a href="/blog/" class="inline-block text-teal-600 font-bold hover:underline">
-            ← ブログ一覧へ戻る
-          </a>
         </div>
+      </aside>
 
-      </main>
-    </div>
+      <div class="text-center">
+        <a href="/blog/" class="inline-block text-teal-600 font-bold hover:underline">
+          ← ブログ一覧へ戻る
+        </a>
+      </div>
 
-    <Footer />
-  </body>
-</html>
+    </main>
+  </div>
+
+{/* 💡 最後にLayoutを閉じます */}
+</Layout>

@@ -2,28 +2,35 @@
   {
     "id": "standard",
     "title": "スタンダード（学生からアクティブシニアまで）",
-    "slug": "/activities/standard",
+    "slug": "/activities/standard/",
     "description": "学生からアクティブシニアまで参加可能なメインクラスです。学生無料規定もあります。",
     "tags": ["学生無料", "公共施設利用"]
   },
   {
     "id": "kids",
     "title": "キッズクラス（表現力を育む）",
-    "slug": "/activities/kids",
+    "slug": "/activities/kids/",
     "description": "子どもたちの成長とリズム感を重視した楽しいクラスです。",
     "tags": ["初心者歓迎"]
   },
   {
     "id": "gold",
     "title": "ゴールド・スマイル（いきいき健康クラス）",
-    "slug": "/activities/gold",
+    "slug": "/activities/gold/",
     "description": "輝く毎日のためのアクティブなクラスです。初心者の方も大歓迎です。",
     "tags": ["初心者歓迎", "健康増進"]
   },
   {
+    "id": "salsa",
+    "title": "サルサ・バチャータ",
+    "description": "ラテンの音楽に合わせて楽しく踊るクラスです。ペアでもソロでも、初心者から安心してご参加いただけます。",
+    "tags": ["初心者歓迎", "ラテン"],
+    "slug": "/activities/salsa/"
+  },
+  {
     "id": "neko-odori",
     "title": "ズンとも猫おどり部",
-    "slug": "/activities/neko-odori",
+    "slug": "/activities/neko-odori/",
     "description": "地域イベントに向けた特別チームです。お祭り好き集まれ！",
     "tags": ["地域イベント", "特別チーム"]
   }

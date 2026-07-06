@@ -16,50 +16,72 @@ const navLinks = [
       { href: '/activities/neko-odori/', label: '猫おどり部' },
     ],
   },
-  // 💡 ここを NEWS から BLOG に変更し、パスを /blog/ に設定しました！
   { href: '/blog/', label: 'BLOG' },
 ];
 
 // LINEのURLを変数として管理
 const LINE_URL = 'https://lin.ee/8Rjc7Jd';
+
+// 💡 現在のURLパスを取得
+const currentPath = Astro.url.pathname;
+
+// 💡 カレント判定ロジック
+// (hrefが現在のパスと一致するか、または下層ページを見ているかを判定)
+const isCurrent = (href: string, children?: {href: string, label: string}[]) => {
+  if (href === '/') return currentPath === '/';
+  if (href.startsWith('/#')) {
+    if (children) {
+      // 下層ページ（/activities/...）にいる場合は親メニューをカレントにする
+      return children.some(child => currentPath.startsWith(child.href));
+    }
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(href);
+};
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 shadow-sm">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1 md:px-6">
     
-    {/* ロゴ部分：alt属性でローカルSEOを強化 */}
+    {/* ロゴ部分 */}
     <a href="/" class="flex items-center transition-opacity hover:opacity-80" aria-label="ズンともホーム">
       <img src={logoImage.src} alt="沼津・三島のダンスサークル ズンとも" class="h-16 md:h-20 w-auto" />
     </a>
 
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">
-      {navLinks.map((link) => (
-        link.children ? (
+      {navLinks.map((link) => {
+        // 💡 カレント状態を取得
+        const isActive = isCurrent(link.href, link.children);
+        
+        return link.children ? (
           <div class="relative group py-4">
-            <a href={link.href} class="text-sm font-medium text-slate-700 transition hover:text-slate-900 flex items-center gap-1">
+            <a href={link.href} class={`text-sm font-bold transition flex items-center gap-1 ${isActive ? 'text-emerald-600' : 'text-slate-700 hover:text-slate-900'}`}>
               {link.label}
-              <svg class="h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <svg class={`h-4 w-4 transition-transform duration-200 group-hover:rotate-180 ${isActive ? 'text-emerald-600' : 'text-slate-400 group-hover:text-slate-600'}`} viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
             </a>
             <div class="absolute left-1/2 -translate-x-1/2 top-full z-50 w-48 rounded-xl bg-white py-2 shadow-xl ring-1 ring-black/5 transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible">
-              {link.children.map((child) => (
-                <a href={child.href} class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">
-                  {child.label}
-                </a>
-              ))}
+              {link.children.map((child) => {
+                const isChildActive = currentPath.startsWith(child.href);
+                return (
+                  <a href={child.href} class={`block px-4 py-2.5 text-sm transition hover:bg-slate-50 ${isChildActive ? 'text-emerald-600 font-bold bg-slate-50' : 'text-slate-600 hover:text-slate-900'}`}>
+                    {child.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
         ) : (
-          <a href={link.href} class="text-sm font-medium text-slate-700 transition hover:text-slate-900 py-4">
+          <a href={link.href} class={`text-sm font-bold transition py-4 ${isActive ? 'text-emerald-600' : 'text-slate-700 hover:text-slate-900'}`}>
             {link.label}
           </a>
-        )
-      ))}
+        );
+      })}
     </nav>
 
     <div class="flex items-center gap-2 md:gap-3">
-      {/* PC版 LINEボタン：URL反映と別タブで開く設定を追加 */}
+      {/* PC版 LINEボタン */}
       <a
         href={LINE_URL}
         target="_blank"
@@ -72,6 +94,7 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
         <span class="hidden md:inline">LINEで体験申込</span>
       </a>
 
+      {/* ハンバーガーメニューボタン */}
       <button
         id="header-menu-button"
         type="button"
@@ -87,30 +110,36 @@ const LINE_URL = 'https://lin.ee/8Rjc7Jd';
     </div>
   </div>
 
+  {/* モバイルメニュー */}
   <nav id="mobile-menu" class="hidden border-t border-slate-200 bg-white/95 px-4 pb-4 md:hidden" aria-label="Mobile navigation">
     <div class="flex flex-col gap-2 pt-3">
-      {navLinks.map((link) => (
-        link.children ? (
+      {navLinks.map((link) => {
+        const isActive = isCurrent(link.href, link.children);
+        
+        return link.children ? (
           <div>
-            <a href={link.href} class="block rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100">
+            <a href={link.href} class={`block rounded-2xl px-4 py-3 text-sm font-bold transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-800 hover:bg-slate-100'}`}>
               {link.label}
             </a>
             <div class="ml-4 flex flex-col gap-1 border-l-2 border-slate-100 pl-4 py-1">
-              {link.children.map((child) => (
-                <a href={child.href} class="rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900">
-                  {child.label}
-                </a>
-              ))}
+              {link.children.map((child) => {
+                const isChildActive = currentPath.startsWith(child.href);
+                return (
+                  <a href={child.href} class={`rounded-xl px-4 py-2 text-sm transition ${isChildActive ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
+                    {child.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
         ) : (
-          <a href={link.href} class="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+          <a href={link.href} class={`block rounded-2xl px-4 py-3 text-sm font-bold transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-100'}`}>
             {link.label}
           </a>
-        )
-      ))}
+        );
+      })}
       
-      {/* スマホ版 LINEボタン：URL反映と別タブで開く設定を追加 */}
+      {/* スマホ版 LINEボタン */}
       <a
         href={LINE_URL}
         target="_blank"
