@@ -4,6 +4,7 @@ title: "Sound Vacation 2025｜Triple★Star ステージ出演レポート"
 description: "裾野市・大野路ファミリーキャンプ場で開催された Sound Vacation 2025 に、ズンとものKIDS DANCEユニット「Triple★Star」が出演！自然と音楽に包まれた会場でのステージの様子をフォトダイジェストでレポートします。"
 date: "2025-10-05"
 heroImage: "/assets/blog/2025/10/susono-sound-vacation-2025-stage-zuntomo-hero-640.webp"
+tags: ["裾野", "キッズ", "イベント"]
 ---
 
 10月5日（日）、2日間に渡って富士山のふもと、裾野市「大野路ファミリーキャンプ場」で開催された屋外フェス「Sound Vacation（サンバケ）」に、 ズンとものKIDS DANCEユニット「Triple★Star」が出演しました。

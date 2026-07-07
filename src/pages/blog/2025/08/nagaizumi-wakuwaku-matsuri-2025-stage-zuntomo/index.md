@@ -4,6 +4,7 @@ title: "長泉わくわくまつり 2025｜ZUNTOMOステージ出演レポート
 description: "「長泉わくわくまつり」で行われた「踊りパレード・コンテスト」に、ZUNTOMOから【No.12 ズンとも連】として出場しました。当日の流れとステージの様子を写真付きでまとめています。"
 date: "2025-08-02"
 heroImage: "/assets/blog/2025/08/nagaizumi-wakuwaku-matsuri-2025-stage-zuntomo-hero-800.webp"
+tags: ["長泉", "S-DANCE", "イベント"]
 ---
 
 2025年08月02日に「下土狩駅前 大いちょう通り」で行われた、「長泉わくわくまつり・踊りパレード」のレポートです。

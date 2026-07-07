@@ -4,6 +4,7 @@ title: "江ノ島 ZUMBA&Hip-Hop Latin Fastival 2025｜S-DANCE 静岡山梨チー
 description: "神奈川県藤沢市で行われた「江ノ島 ZUMBA&Hip-Hop Latin Fastival 2025」に、ZUNTOMOからSHO、SUZU、NIKU、静岡市からYUKI、下田市からMEE&TAA、西伊豆からMK、山梨県甲府市からKARYが【S-DANCE静岡山梨チーム】として出演しました。当日の流れとステージの様子を写真付きでまとめています。"
 date: "2025-04-27"
 heroImage: "/assets/blog/2025/04/fujisawa-enoshima-latin-festival-2025-stage-zuntomo-hero-800.webp"
+tags: ["藤沢", "ZUMBA", "イベント"]
 ---
 
 神奈川県藤沢市で行われた「江ノ島 ZUMBA&Hip-Hop Latin Fastival 2025」に、ZUNTOMOからSHO、SUZU、NIKU、静岡市からYUKI、下田市からMEE&TAA、東京からMK、山梨県甲府市からKA-RI-が【S-DANCE静岡山梨チーム】として出演しました。

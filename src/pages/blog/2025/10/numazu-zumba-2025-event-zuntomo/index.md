@@ -4,6 +4,7 @@ title: "AI&SUZU 沼津市総合体育館 ZUMBA® パーティレポート"
 description: "沼津市総合体育館で行われたサークル「Adress」主宰のAIと、サークル「ズンとも」主宰のSUZUによるZUMBA®パーティのリポートです。"
 date: "2025-10-19"
 heroImage: "/assets/blog/2025/10/numazu-zumba-2025-event-zuntomo-hero-800.webp"
+tags: ["沼津", "ZUMBA", "イベント"]
 ---
 
 10月19日（日）、沼津市総合体育館「香稜アリーナ」2F多目的スタジオでZUMBA®パーティを開催しました（JWI承認番号34109）。

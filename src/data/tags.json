@@ -1,0 +1,20 @@
+{
+  "沼津": { "slug": "numazu", "category": "area" },
+  "藤沢": { "slug": "fujisawa", "category": "area" },
+  "三島": { "slug": "mishima", "category": "area" },
+  "裾野": { "slug": "susono", "category": "area" },
+  "函南": { "slug": "kannami", "category": "area" }, 
+  "長泉": { "slug": "nagaizumi", "category": "area" },
+  "清水町": { "slug": "shimizu-cho", "category": "area" },
+
+  "S-DANCE": { "slug": "sdance", "category": "class" },
+  "ZUMBA": { "slug": "zumba", "category": "class" }, 
+  "キッズ": { "slug": "kids", "category": "class" },
+  "ゴールド": { "slug": "gold", "category": "class" },
+  "サルサ": { "slug": "salsa", "category": "class" },
+  "猫おどり": { "slug": "neko-odori", "category": "class" },
+
+  "イベント": { "slug": "event", "category": "type" }, 
+  "お知らせ": { "slug": "news", "category": "type" }, 
+  "レッスン報告": { "slug": "report", "category": "type" } 
+}

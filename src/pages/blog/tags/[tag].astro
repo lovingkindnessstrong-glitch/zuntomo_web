@@ -1,0 +1,85 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import tagsDict from '../../../data/tags.json';
+
+export async function getStaticPaths() {
+  // Astro.glob(...) の行を以下に差し替え
+const allPosts = Object.values(import.meta.glob('../../**/*.md', { eager: true })) as any[];
+  
+  // 💡 結果を as string[] と明示して格納します
+  const uniqueTags = [...new Set(allPosts.flatMap((post: any) => post.frontmatter.tags || []))] as string[];
+
+  return uniqueTags.map((tag: string) => {
+    const dictData = (tagsDict as any)[tag];
+    const slug = dictData ? dictData.slug : encodeURIComponent(tag);
+
+    const filteredPosts = allPosts.filter((post: any) => 
+      (post.frontmatter.tags || []).includes(tag)
+    );
+
+    return {
+      params: { tag: slug },
+      props: { 
+        tagName: tag,
+        posts: filteredPosts 
+      }
+    };
+  });
+}
+
+// 💡 ここでも props の型を明示します
+const { tagName, posts } = Astro.props as { tagName: string, posts: any[] };
+
+const sortedPosts = posts.sort((a: any, b: any) => {
+  return new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf();
+});
+
+const breadcrumbItems = [
+  { label: 'ホーム', href: '/' },
+  { label: 'ブログ', href: '/blog/' },
+  { label: `「${tagName}」の記事一覧` },
+];
+---
+
+<Layout title={`${tagName}の記事一覧 | ZUNTOMO`}>
+  <div class="bg-slate-50 min-h-screen pt-8 pb-20">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <Breadcrumb items={breadcrumbItems} />
+      
+      <div class="mt-4 mb-10 pb-6 border-b border-slate-200">
+        <p class="text-emerald-600 font-bold mb-2">タグ検索結果</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-slate-800 flex items-center gap-3">
+          <span class="bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-lg text-2xl md:text-3xl"># {tagName}</span>
+          <span>の記事一覧</span>
+        </h1>
+        <p class="text-slate-500 mt-4 font-medium">全 {sortedPosts.length} 件</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map((post: any) => (
+          <a href={post.url} class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 hover:-translate-y-1 flex flex-col h-full">
+            <div class="aspect-[4/3] overflow-hidden bg-slate-200">
+              <img 
+                src={post.frontmatter.heroImage || '/assets/images/common/default-ogp.webp'}
+                alt={post.frontmatter.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center justify-between mb-3">
+                <time datetime={post.frontmatter.date} class="text-sm font-medium text-emerald-600">
+                  {post.frontmatter.date}
+                </time>
+              </div>
+              <h3 class="text-lg font-bold text-slate-800 mb-3 leading-snug group-hover:text-emerald-600 transition-colors">
+                {post.frontmatter.title}
+              </h3>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</Layout>
