@@ -2,8 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import activities from '../data/activities.json';
 import { Image } from 'astro:assets';
-
 import heroImage from '../assets/images/home/hero.png';
+
+// 修正：getCollectionではなく、Astro.globでMarkdownファイルを直接取得します
+const allPosts = Object.values(import.meta.glob('./blog/**/*.md', { eager: true })) as any[];
+// 日付順にソート（frontmatterの中のdateを参照します）
+const sortedPosts = allPosts.sort((a: any, b: any) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+
+// tagsに 'news' が含まれるものを抽出
+const newsPosts = sortedPosts.filter((post: any) => post.frontmatter.tags?.includes('news')).slice(0, 3);
 
 const colorSchemes: Record<string, { bg: string; icon: string; button: string; hover: string }> = {
   standard: { bg: 'bg-emerald-100', icon: 'text-emerald-600', button: 'bg-emerald-500', hover: 'hover:bg-emerald-600' },
@@ -22,6 +29,7 @@ const icons: Record<string, string> = {
 };
 ---
 
+
 <Layout title="ダンスサークル「ズンとも」| 沼津・三島の大人向けZUMBA・キッズダンス教室">
   <section class="relative h-96 w-full overflow-hidden md:h-[500px]">
     <Image 
@@ -39,6 +47,46 @@ const icons: Record<string, string> = {
     </div>
   </section>
   
+  <!-- 新設：お知らせ・イベントセクション -->
+<section class="mx-auto max-w-6xl px-6 py-8 sm:px-8">
+  <div class="rounded-lg border border-emerald-200 bg-emerald-50/50 p-6 shadow-sm">
+    <h2 class="mb-4 text-xl font-bold text-slate-900 border-b-2 border-emerald-500 pb-2 inline-block">
+      💃ズンともNEWS💡
+    </h2>
+  
+    <ul class="flex flex-col gap-3">
+        {newsPosts.length > 0 ? (
+          newsPosts.map((post: any) => (
+            <li class="border-b border-slate-200 border-dashed pb-3 last:border-0 last:pb-0">
+              {/* URLは post.url で取得できます */}
+              <a href={post.url} class="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 hover:opacity-80 transition-opacity">
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-medium text-slate-500">
+                    {/* frontmatterのdateを日付形式に変換 */}
+                    {new Date(post.frontmatter.date).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')}
+                  </span>
+                  <span class="rounded bg-emerald-500 px-2 py-0.5 text-xs font-bold text-white">NEWS</span>
+                </div>
+                <span class="text-base font-medium text-slate-800 group-hover:text-emerald-600 transition-colors">
+                  {post.frontmatter.title}
+                </span>
+              </a>
+            </li>
+          ))
+        ) : (
+          <li class="text-slate-600 py-2">現在、新しいお知らせはありません。</li>
+        )}
+      </ul>
+
+    <!-- ブログ一覧への導線 -->
+    <div class="mt-6 text-right">
+      <a href="/blog/" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 hover:underline">
+        🌈過去の活動報告・お知らせ一覧を見る →
+      </a>
+    </div>
+  </div>
+</section>
+
   <main class="min-h-screen pt-4 md:pt-6">
     <section class="mx-auto max-w-6xl px-6 py-20 sm:px-8">
       <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
