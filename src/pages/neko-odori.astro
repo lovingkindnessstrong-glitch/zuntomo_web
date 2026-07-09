@@ -1,0 +1,466 @@
+---
+// かんなみ猫おどり＆キッズダンス 新メンバー募集LP
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【参加無料】かんなみ猫おどり 新メンバー募集！ | ズンとも猫おどり部</title>
+    <meta name="description" content="函南のダンスサークル『ズンとも猫おどり部』では、かんなみ猫おどりに向けた参加メンバーを募集中！初心者・未経験者大歓迎。まずは公式LINEからお気軽に練習見学へ！">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style is:global>
+        :root {
+            --primary-color: #E65100; /* お祭りの熱気を感じるオレンジ */
+            --accent-color: #FFB300;
+            --line-green: #06C755; /* LINE公式カラー */
+            --line-green-hover: #05B34C;
+            --text-main: #333333;
+            --bg-light: #FFF8F0;
+            --bg-white: #FFFFFF;
+        }
+
+        /* Reset & Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Layout Wrapper */
+        .lp-container {
+            max-width: 480px; /* モバイルファーストの最大幅 */
+            margin: 0 auto;
+            background-color: var(--bg-white);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            line-height: 1.4;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* CTA Button (LINE) */
+        .cta-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--line-green);
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(6, 199, 85, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button:hover {
+            background-color: var(--line-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 199, 85, 0.4);
+        }
+        .cta-button .cta-main-text {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .cta-button .cta-sub-text {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .cta-button.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* --- Section 1: Hero --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #FF7043);
+            color: #fff;
+            padding: 50px 20px 40px;
+            text-align: center;
+        }
+        .hero-micro {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-main);
+            font-weight: 900;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+        .hero-sub {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* --- Section 2: Empathy --- */
+        .empathy {
+            background-color: var(--bg-light);
+        }
+        .speech-bubble {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+            border-left: 5px solid var(--accent-color);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .empathy-text {
+            font-size: 0.95rem;
+        }
+
+        /* --- Section 3: Roles --- */
+        .role-card {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        .role-card:hover {
+            border-color: var(--primary-color);
+        }
+        .role-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .role-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+        .role-desc {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* --- Section 4: Benefits --- */
+        .benefits {
+            background-color: var(--bg-light);
+        }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        .benefit-number {
+            background-color: var(--primary-color);
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        .benefit-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        .benefit-content p {
+            font-size: 0.9rem;
+        }
+
+        /* --- Section 5: Schedule --- */
+        .schedule-box {
+            background: #fff;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .schedule-row {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+        .schedule-label {
+            font-weight: 700;
+            width: 60px;
+            flex-shrink: 0;
+            color: var(--primary-color);
+        }
+        .schedule-detail {
+            font-size: 0.95rem;
+        }
+        .map-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #eee;
+        }
+        .map-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Section 6: Closing CTA --- */
+        .closing {
+            background-color: #fff;
+            text-align: center;
+        }
+        .closing-text {
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+        .closing .cta-button {
+            padding: 22px 20px;
+        }
+        .closing .cta-main-text {
+            font-size: 1.4rem;
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 0;
+            }
+            .lp-container {
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="lp-container">
+    
+    <section class="hero">
+        <div style="margin-bottom: 20px;">
+            <img src="/assets/images/kannami-neko-hero.webp" alt="かんなみ猫おどりに向けて練習中のズンとも猫おどり部" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        </div>
+        <div class="hero-micro">参加費完全無料 / 初心者大歓迎</div>
+        <h1 class="hero-title">ズンとも猫おどり部<br>10月3日(木)本番！<br>「かんなみ猫おどり」に向けて<br>絶賛練習中！</h1>
+        <p class="hero-sub">函南で踊ろう。ダンスサークル『ズンとも猫おどり部』と一緒に最高の思い出を作りませんか？</p>
+        
+        <a href="https://lin.ee/Rsoixts" class="cta-button pulse">
+            <span class="cta-main-text">公式LINEはこちら</span>
+            <span class="cta-sub-text">まずは水曜日の練習に遊びに来ませんか？<br>持ち物などの確認もお気軽に！</span>
+        </a>
+    </section>
+
+    <section class="empathy">
+        <h2 class="section-title">気になってるけど、<br>こんな不安ありませんか？</h2>
+        
+        <div class="speech-bubble">「お祭りには出てみたいけど、どんな雰囲気で練習してるの？」</div>
+        <div class="speech-bubble">「うちの子、ダンス初めてだけどついていけるかな…？」</div>
+        <div class="speech-bubble">「いきなりお問合せ先に電話するのは、ちょっと緊張する…」</div>
+        
+        <div style="text-align: center; margin: 25px 0 15px;">
+            <img src="/assets/images/kannami-neko-instructor.webp" alt="ズンとも猫おどり部の楽しいステージ風景とインストラクター" style="border-radius: 15px; max-width: 90%; border: 3px solid var(--accent-color);">
+        </div>
+
+        <p class="empathy-text">
+            そんな方は、ぜひ一度『ズンとも猫おどり部』の練習にふらっと遊びに来てください！私たちは「かんなみ猫おどり」のステージをみんなで楽しむために、和気あいあいと活動している地域サークルです。優しいインストラクターと仲間たちが笑顔でお迎えします！
+        </p>
+    </section>
+
+    <section class="roles">
+        <h2 class="section-title">どんな年代でも輝ける！<br>それぞれの「役割」で楽しもう</h2>
+        <p style="margin-bottom: 25px; text-align: center; font-size: 0.95rem;">
+            『ズンとも猫おどり部』では、年齢に関係なく、自分の好きな「役割」でステージを楽しめます！
+        </p>
+
+        <div class="role-card">
+            <div class="role-icon">🐾</div>
+            <h3 class="role-title">キッズ・子猫枠<br><span style="font-size: 0.8rem; color: #666; font-weight: normal;">（幼稚園〜小学生メイン）</span></h3>
+            <p class="role-desc">とにかく可愛く、元気いっぱいに！初めてのダンスでも、音楽に合わせて楽しく体を動かすだけで立派なステージになります。</p>
+        </div>
+
+        <div class="role-card">
+            <div class="role-icon">⭐</div>
+            <h3 class="role-title">アイドル・パフォーマンス枠<br><span style="font-size: 0.8rem; color: #666; font-weight: normal;">（中高生・20代メイン）</span></h3>
+            <p class="role-desc">ステージのセンターで華やかに輝く！カッコよく、可愛く踊りたい若いパワーはもちろん、「気持ちはアイドル！」な方も大歓迎です。</p>
+        </div>
+
+        <div class="role-card">
+            <div class="role-icon">🏮</div>
+            <h3 class="role-title">大人猫枠<br><span style="font-size: 0.8rem; color: #666; font-weight: normal;">（年齢不問。70代の方もいます）</span></h3>
+            <p class="role-desc">笑って踊れる大人の部活。パパもママも、おじいちゃんもおばあちゃんも。子どもたちの応援だけでなく、主役として一緒に盛り上がりましょう！</p>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <h2 class="section-title">『ズンとも猫おどり部』が<br>選ばれる3つの理由</h2>
+        
+        <div class="benefit-item">
+            <div class="benefit-number">1</div>
+            <div class="benefit-content">
+                <h3>完全無料！</h3>
+                <p>参加費はずっと無料。家計に優しく気軽に始められます。</p>
+            </div>
+        </div>
+        
+        <div class="benefit-item">
+            <div class="benefit-number">2</div>
+            <div class="benefit-content">
+                <h3>初心者・未経験者大歓迎！</h3>
+                <p>難しいステップは後回し。まずは「楽しく踊る」ことをみんなでサポートします。</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-number">3</div>
+            <div class="benefit-content">
+                <h3>アットホームな居場所</h3>
+                <p>学校や職場以外の、新しい地域の繋がりができます。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" style="background-color: #fff;">
+        <h2 class="section-title">毎年ステージは大盛り上がり！<br>最高の思い出が待っています</h2>
+        
+        <div style="background-color: #fff9e6; border: 1px solid #ffe082; border-radius: 8px; padding: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
+            <img src="/assets/images/kannami-neko-odori-2025-newspaper-clip-400.webp" alt="新聞にも掲載されたかんなみ猫おどり" style="width: 80px; height: auto; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <p style="font-size: 0.85rem; margin: 0; font-weight: 700; color: #555;">💡 昨年のイベントの様子は地元新聞でも大きく取り上げられ、大盛況でした！</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+            <div>
+                <img src="/assets/images/kannami-neko-odori-2025-stage-zuntomo-03-640.webp" alt="やぐらの上で踊るズンともメンバー" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                <p style="font-size: 0.8rem; text-align: center; color: #666; margin-top: 5px;">▲ 提灯が輝く本番ステージ！気分は最高潮です</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>
+                    <img src="/assets/images/kannami-neko-odori-2025-stage-zuntomo-07-400.webp" alt="猫メイクで楽しむ参加者" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                </div>
+                <div>
+                    <img src="/assets/images/kannami-neko-odori-2025-stage-zuntomo-09-400.webp" alt="子どもから大人まで仲良しの集合写真" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; text-align: center; color: #666; margin-top: 0;">▲ 可愛い猫メイクも大好評！世代を超えて仲良しです</p>
+        </div>
+    </section>
+
+    <section class="schedule">
+        <h2 class="section-title">10月3日の本番ステージに向けて<br>今からなら余裕で間に合います！</h2>
+        
+        <div class="schedule-box">
+            <div class="schedule-row">
+                <div class="schedule-label">日時</div>
+                <div class="schedule-detail">毎週水曜 18:45〜19:15</div>
+            </div>
+            <div class="schedule-row">
+                <div class="schedule-label">参加費</div>
+                <div class="schedule-detail">無料（※後半の大人向けZUMBAは別料金）</div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; text-align: center; color: var(--primary-color); margin-bottom: 20px;">練習場所のご案内</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            
+            <div style="background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #ddd;">
+                <h4 style="margin-bottom: 5px; font-size: 1rem; color: #333;">📅 9月〜6月</h4>
+                <p style="font-weight: 700; margin-bottom: 10px; font-size: 0.95rem;">函南西部コミュニティセンター<br>（体育館）</p>
+                <div class="map-wrapper" style="padding-bottom: 75%;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3265.330583786339!2d138.92875707476713!3d35.07347197278947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60199112bfb4bf2f%3A0x313b3b624566b314!2z5Ye95Y2X55S66KW_6YOo44Kz44Of44Ol44OL44OG44Kj44K744Oz44K_44O8!5e0!3m2!1sja!2sjp!4v1783587133133!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+
+            <div style="background: #fff; padding: 15px; border-radius: 10px; border: 2px solid var(--accent-color); position: relative;">
+                <div style="position: absolute; top: -12px; left: 15px; background-color: #d32f2f; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">現在の練習場所</div>
+                
+                <h4 style="margin-top: 5px; margin-bottom: 5px; font-size: 1rem; color: var(--primary-color);">📅 7月〜8月（夏期限定）</h4>
+                <p style="font-weight: 700; margin-bottom: 10px; font-size: 0.95rem;">函南町文化センター<br>（2階小ホール）</p>
+                <div class="map-wrapper" style="padding-bottom: 75%;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3264.6022043612106!2d138.9478792!3d35.091670799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601991244add5b0b%3A0x62d9fbc7a6ded63e!2z5Ye95Y2X55S65paH5YyW44K744Oz44K_44O8!5e0!3m2!1sja!2sjp!4v1783586699371!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+                <p style="font-size: 0.8rem; color: #d32f2f; margin-top: 10px; font-weight: 700; text-align: center;">※冷房完備で快適です！</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="closing">
+        <h2 class="section-title"><br>直接会場に来てもOK！<br>気軽に遊びに来て下さい😺</h2>
+        
+        <div class="closing-text">
+            <p style="font-weight: 700; margin-bottom: 10px; color: var(--primary-color);">「今週の水曜日、ちょっと覗きに行ってみようかな？」と思ったら！</p>
+            <p>「駐車場はどこ？」「持っていくものはある？」など、ささいなご質問も『ズンとも猫おどり部』公式LINEから1対1で気軽にお答えします！</p>
+        </div>
+
+        <a href="https://lin.ee/Rsoixts" class="cta-button pulse" style="padding: 25px 15px;">
+            <span class="cta-main-text" style="font-size: 1.3rem;">公式LINEを友だち追加して<br>練習を見に行く</span>
+            <span class="cta-sub-text" style="margin-top: 5px;">タップしてLINEを開きます</span>
+        </a>
+    </section>
+
+</div>
+
+</body>
+</html>
