@@ -1,0 +1,234 @@
+---
+// src/components/Schedule.astro
+import scheduleDataRaw from '../data/schedule.json';
+
+type ScheduleData = {
+  period: string;
+  last_updated: string;
+  lessons: {
+    id: string;
+    category: string;
+    tags: string[];
+    title: string;
+    sponsor: string;
+    location: string;
+    fee: string;
+    schedules: { date: string; time: string; room?: string; is_special_time?: boolean }[];
+  }[];
+  alerts: { category: string; message: string }[];
+};
+
+const scheduleData = scheduleDataRaw as ScheduleData;
+const { period, last_updated, lessons, alerts } = scheduleData;
+
+const formatDisplayDate = (dateString: string) => {
+  if (!dateString.includes('-')) return dateString; 
+  const date = new Date(dateString);
+  const days = ['日', '月', '火', '水', '木', '金', '土'];
+  return `${date.getMonth() + 1}/${date.getDate()}(${days[date.getDay()]})`;
+};
+
+const mainCategories = [
+  { id: "zumba", icon: "💃", label: "ZUMBA®" },
+  { id: "sdance", icon: "👟", label: "S-DANCE™" },
+  { id: "gold", icon: "🪑", label: "ゴールド" },
+  { id: "kids", icon: "🐣", label: "KIDS" },
+  { id: "neko", icon: "🏮", label: "猫おどり" },
+  { id: "salsa", icon: "🌶️", label: "サルサ" },
+  { id: "social", icon: "🍻", label: "親睦会" }
+];
+
+const subTags = ["定期", "イベント", "沼津", "三島", "裾野", "函南", "清水町", "長泉", "伊豆の国","県外" ];
+
+const getCategoryColor = (catId: string) => {
+  const colors: Record<string, string> = {
+    zumba: "border-green-400 bg-green-50",
+    sdance: "border-blue-400 bg-blue-50",
+    gold: "border-yellow-400 bg-yellow-50",
+    kids: "border-orange-400 bg-orange-50",
+    neko: "border-red-400 bg-red-50",
+    salsa: "border-purple-400 bg-purple-50",
+    social: "border-pink-400 bg-pink-50"
+  };
+  return colors[catId] || "border-slate-300 bg-white";
+};
+---
+
+<section class="max-w-md mx-auto bg-slate-50 min-h-screen p-4 sm:p-6 font-sans">
+  <header class="mb-6 text-center">
+    <h2 class="text-2xl font-black text-slate-800 tracking-tight">{period} スケジュール</h2>
+    <p class="text-xs text-slate-500 mt-1">※最終更新：{last_updated}</p>
+  </header>
+
+  <div class="mb-8">
+    <p class="text-sm text-slate-600 font-bold mb-3 text-center">👇 出たいレッスンを選んで下さい🐱</p>
+    
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4">
+      {mainCategories.map(btn => (
+        <button class="filter-main-btn flex flex-col items-center justify-center py-3 bg-white border-2 border-slate-200 rounded-xl shadow-sm transition-all duration-200 w-[calc(33.333%-0.5rem)] sm:w-[calc(33.333%-0.75rem)]" data-category={btn.id}>
+          <span class="text-2xl mb-1">{btn.icon}</span>
+          <span class="text-[11px] sm:text-xs font-black text-slate-700 whitespace-nowrap">{btn.label}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-4">
+      {subTags.map(tag => (
+        <button class="filter-sub-btn px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-600 transition-colors" data-tag={tag}>
+          [{tag}]
+        </button>
+      ))}
+    </div>
+
+    <button id="reset-btn" class="hidden w-full py-3 bg-slate-700 text-white font-bold rounded-xl shadow flex items-center justify-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+      すべての予定を表示に戻す
+    </button>
+  </div>
+
+  <div class="space-y-6" id="schedule-container">
+    {lessons.map((lesson) => (
+      <article class={`schedule-card rounded-xl shadow-sm border-l-4 ${getCategoryColor(lesson.category)} overflow-hidden transition-all duration-300`} data-category={lesson.category} data-tags={lesson.tags.join(',')}>
+        <div class="px-4 py-3 border-b border-black/5 flex flex-col gap-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            {lesson.tags.map(tag => (
+              <span class="text-[10px] bg-white border border-slate-200 px-1.5 py-0.5 rounded font-bold text-slate-600">[{tag}]</span>
+            ))}
+            {lesson.sponsor && <span class="text-[10px] text-slate-500 font-medium">{lesson.sponsor}</span>}
+          </div>
+          <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-tight">{lesson.title}</h3>
+        </div>
+        
+        <div class="p-4 bg-white/60">
+          <div class="mb-3 text-xs sm:text-sm text-slate-700 space-y-1">
+            <div class="flex items-start"><span class="mr-1">📍</span><span>{lesson.location}</span></div>
+            <div class="flex items-start"><span class="mr-1">💰</span><span>{lesson.fee}</span></div>
+          </div>
+          
+          <ul class="space-y-2 mt-3 pt-3 border-t border-slate-200/60">
+            {/* ▼ 修正：li に schedule-row クラスと data-date 属性を追加 */}
+            {lesson.schedules.map((s) => (
+              <li class="schedule-row flex items-center text-sm transition-all duration-300" data-date={s.date}>
+                <span class="w-16 font-bold text-slate-700 shrink-0">{formatDisplayDate(s.date)}</span>
+                <span class={`font-medium ${s.is_special_time ? 'text-rose-600 font-bold bg-rose-50 px-1 rounded' : 'text-slate-600'}`}>{s.time}</span>
+                {s.room && <span class="ml-2 text-xs text-slate-500">... {s.room}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    ))}
+
+    {alerts && alerts.length > 0 && (
+      <div class="mt-8 space-y-3">
+        {alerts.map(alert => (
+          <div class="alert-card bg-rose-50 border border-rose-200 p-3 rounded-lg text-sm text-rose-700 font-bold transition-all duration-300" data-category={alert.category}>
+            {alert.message}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let activeCategory: string | null = null;
+    let activeTag: string | null = null;
+    
+    const mainBtns = document.querySelectorAll('.filter-main-btn');
+    const subBtns = document.querySelectorAll('.filter-sub-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const cards = document.querySelectorAll('.schedule-card');
+    const alerts = document.querySelectorAll('.alert-card');
+
+    // ▼ 追加：過去の日付を判定してグレーアウトさせる処理
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // 今日の0時0分を基準に設定
+
+    document.querySelectorAll('.schedule-row').forEach((row: Element) => {
+      const dateStr = row.getAttribute('data-date');
+      // 日付フォーマット（YYYY-MM-DD）が含まれている場合のみ判定
+      if (dateStr && dateStr.includes('-')) {
+        const rowDate = new Date(dateStr);
+        // 今日より前の日付なら薄くする（opacity-40）
+        if (rowDate < today) {
+          row.classList.add('opacity-40', 'grayscale');
+        }
+      }
+    });
+
+    const updateFilters = () => {
+      cards.forEach((card: Element) => {
+        const cardCategory = card.getAttribute('data-category');
+        const cardTags = card.getAttribute('data-tags') || "";
+        
+        const matchCategory = !activeCategory || cardCategory === activeCategory;
+        const matchTag = !activeTag || cardTags.includes(activeTag);
+        
+        if (matchCategory && matchTag) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      alerts.forEach((alert: Element) => {
+        const alertCat = alert.getAttribute('data-category');
+        if (!activeCategory || alertCat === activeCategory) {
+          alert.classList.remove('hidden');
+        } else {
+          alert.classList.add('hidden');
+        }
+      });
+
+      if (resetBtn) {
+        if (activeCategory || activeTag) {
+          resetBtn.classList.remove('hidden');
+        } else {
+          resetBtn.classList.add('hidden');
+        }
+      }
+    };
+
+    mainBtns.forEach((btn: Element) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-category');
+        if (activeCategory === cat) {
+          activeCategory = null;
+          btn.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-50');
+        } else {
+          activeCategory = cat;
+          mainBtns.forEach(b => b.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-50'));
+          btn.classList.add('ring-2', 'ring-indigo-500', 'bg-indigo-50');
+        }
+        updateFilters();
+      });
+    });
+
+    subBtns.forEach((btn: Element) => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        if (activeTag === tag) {
+          activeTag = null;
+          btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+        } else {
+          activeTag = tag;
+          subBtns.forEach(b => b.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600'));
+          btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+        }
+        updateFilters();
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        activeCategory = null;
+        activeTag = null;
+        mainBtns.forEach(b => b.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-50'));
+        subBtns.forEach(b => b.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600'));
+        updateFilters();
+      });
+    }
+  });
+</script>

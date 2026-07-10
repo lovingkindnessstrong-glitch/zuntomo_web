@@ -80,7 +80,14 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
       })}
     </nav>
 
-    <div class="flex items-center gap-2 md:gap-3">
+      <!-- 案2：サブボタン風スタイル -->
+        <a href="/schedule" class="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        <span class="text-xs sm:text-sm">今月の予定</span>
+      </a>
+      
       {/* PC版 LINEボタン */}
       <a
         href={LINE_URL}
