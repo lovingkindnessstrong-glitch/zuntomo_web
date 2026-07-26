@@ -8,11 +8,14 @@ type ScheduleData = {
   lessons: {
     id: string;
     category: string;
-    tags: string[];
+    schedule_type: string;
+    area: string;
+    program: string;
     title: string;
     sponsor: string;
     location: string;
     fee: string;
+    url?: string;
     schedules: { date: string; time: string; room?: string; is_special_time?: boolean }[];
   }[];
   alerts: { category: string; message: string }[];
@@ -33,12 +36,13 @@ const mainCategories = [
   { id: "sdance", icon: "👟", label: "S-DANCE™" },
   { id: "gold", icon: "🪑", label: "ゴールド" },
   { id: "kids", icon: "🐣", label: "KIDS" },
-  { id: "neko", icon: "🏮", label: "猫おどり" },
+  { id: "neko", icon: "😺", label: "猫おどり" },
   { id: "salsa", icon: "🌶️", label: "サルサ" },
+  { id: "event", icon: "🎪", label: "イベント" },
   { id: "social", icon: "🍻", label: "親睦会" }
 ];
 
-const subTags = ["定期", "イベント", "沼津", "三島", "裾野", "函南", "清水町", "長泉", "伊豆の国","県外" ];
+const subTags = ["沼津", "三島", "裾野", "函南", "清水町", "長泉", "伊豆の国", "県外"];
 
 const getCategoryColor = (catId: string) => {
   const colors: Record<string, string> = {
@@ -48,6 +52,7 @@ const getCategoryColor = (catId: string) => {
     kids: "border-orange-400 bg-orange-50",
     neko: "border-red-400 bg-red-50",
     salsa: "border-purple-400 bg-purple-50",
+    event: "border-teal-400 bg-teal-50",
     social: "border-pink-400 bg-pink-50"
   };
   return colors[catId] || "border-slate-300 bg-white";
@@ -88,25 +93,33 @@ const getCategoryColor = (catId: string) => {
 
   <div class="space-y-6" id="schedule-container">
     {lessons.map((lesson) => (
-      <article class={`schedule-card rounded-xl shadow-sm border-l-4 ${getCategoryColor(lesson.category)} overflow-hidden transition-all duration-300`} data-category={lesson.category} data-tags={lesson.tags.join(',')}>
+      <article class={`schedule-card rounded-xl shadow-sm border-l-4 ${getCategoryColor(lesson.category)} overflow-hidden transition-all duration-300`} data-category={lesson.category} data-tags={[lesson.schedule_type, lesson.area].filter(Boolean).join(',')}>
         <div class="px-4 py-3 border-b border-black/5 flex flex-col gap-1">
           <div class="flex items-center gap-2 flex-wrap">
-            {lesson.tags.map(tag => (
+            {[lesson.schedule_type, lesson.area].filter(Boolean).map(tag => (
               <span class="text-[10px] bg-white border border-slate-200 px-1.5 py-0.5 rounded font-bold text-slate-600">[{tag}]</span>
             ))}
             {lesson.sponsor && <span class="text-[10px] text-slate-500 font-medium">{lesson.sponsor}</span>}
           </div>
-          <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-tight">{lesson.title}</h3>
+          <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-tight">[{lesson.program}]{lesson.title}</h3>
         </div>
         
         <div class="p-4 bg-white/60">
           <div class="mb-3 text-xs sm:text-sm text-slate-700 space-y-1">
-            <div class="flex items-start"><span class="mr-1">📍</span><span>{lesson.location}</span></div>
-            <div class="flex items-start"><span class="mr-1">💰</span><span>{lesson.fee}</span></div>
+            {lesson.location && <div class="flex items-start"><span class="mr-1">📍</span><span>{lesson.location}</span></div>}
+            {lesson.fee && <div class="flex items-start"><span class="mr-1">💰</span><span>{lesson.fee}</span></div>}
           </div>
           
+          {lesson.url && (
+            <div class="mb-3">
+              <a href={lesson.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-teal-600 bg-teal-50 border border-teal-200 px-3 py-1.5 rounded-md hover:bg-teal-100 transition-colors">
+                <span>詳細を見る（外部サイト）</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          )}
+          
           <ul class="space-y-2 mt-3 pt-3 border-t border-slate-200/60">
-            {/* ▼ 修正：li に schedule-row クラスと data-date 属性を追加 */}
             {lesson.schedules.map((s) => (
               <li class="schedule-row flex items-center text-sm transition-all duration-300" data-date={s.date}>
                 <span class="w-16 font-bold text-slate-700 shrink-0">{formatDisplayDate(s.date)}</span>
@@ -142,16 +155,13 @@ const getCategoryColor = (catId: string) => {
     const cards = document.querySelectorAll('.schedule-card');
     const alerts = document.querySelectorAll('.alert-card');
 
-    // ▼ 追加：過去の日付を判定してグレーアウトさせる処理
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // 今日の0時0分を基準に設定
+    today.setHours(0, 0, 0, 0); 
 
     document.querySelectorAll('.schedule-row').forEach((row: Element) => {
       const dateStr = row.getAttribute('data-date');
-      // 日付フォーマット（YYYY-MM-DD）が含まれている場合のみ判定
       if (dateStr && dateStr.includes('-')) {
         const rowDate = new Date(dateStr);
-        // 今日より前の日付なら薄くする（opacity-40）
         if (rowDate < today) {
           row.classList.add('opacity-40', 'grayscale');
         }
