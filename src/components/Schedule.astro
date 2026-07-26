@@ -36,7 +36,7 @@ const mainCategories = [
   { id: "sdance", icon: "👟", label: "S-DANCE™" },
   { id: "gold", icon: "🪑", label: "ゴールド" },
   { id: "kids", icon: "🐣", label: "KIDS" },
-  { id: "neko", icon: "😺", label: "猫おどり" },
+  { id: "neko", icon: "🏮", label: "猫おどり" },
   { id: "salsa", icon: "🌶️", label: "サルサ" },
   { id: "event", icon: "🎪", label: "イベント" },
   { id: "social", icon: "🍻", label: "親睦会" }
@@ -56,6 +56,24 @@ const getCategoryColor = (catId: string) => {
     social: "border-pink-400 bg-pink-50"
   };
   return colors[catId] || "border-slate-300 bg-white";
+};
+
+// ▼ 自動で複数カテゴリ（検索用タグ）を付与する関数
+const getFilterCategories = (lesson: any) => {
+  const cats = new Set<string>();
+  cats.add(lesson.category);
+  if (lesson.schedule_type === 'イベント') cats.add('event');
+
+  const text = `${lesson.program} ${lesson.title}`.toUpperCase();
+  if (text.includes('ZUMBA')) cats.add('zumba');
+  if (text.includes('S-DANCE') || text.includes('Sダンス')) cats.add('sdance');
+  if (text.includes('ゴールド')) cats.add('gold');
+  if (text.includes('KIDS') || text.includes('キッズ')) cats.add('kids');
+  if (text.includes('猫おどり')) cats.add('neko');
+  if (text.includes('サルサ') || text.includes('バチャータ')) cats.add('salsa');
+  if (text.includes('親睦会')) cats.add('social');
+
+  return Array.from(cats).join(' ');
 };
 ---
 
@@ -93,7 +111,7 @@ const getCategoryColor = (catId: string) => {
 
   <div class="space-y-6" id="schedule-container">
     {lessons.map((lesson) => (
-      <article class={`schedule-card rounded-xl shadow-sm border-l-4 ${getCategoryColor(lesson.category)} overflow-hidden transition-all duration-300`} data-category={lesson.category} data-tags={[lesson.schedule_type, lesson.area].filter(Boolean).join(',')}>
+      <article class={`schedule-card rounded-xl shadow-sm border-l-4 ${getCategoryColor(lesson.category)} overflow-hidden transition-all duration-300`} data-category={getFilterCategories(lesson)} data-tags={[lesson.schedule_type, lesson.area].filter(Boolean).join(',')}>
         <div class="px-4 py-3 border-b border-black/5 flex flex-col gap-1">
           <div class="flex items-center gap-2 flex-wrap">
             {[lesson.schedule_type, lesson.area].filter(Boolean).map(tag => (
@@ -170,10 +188,11 @@ const getCategoryColor = (catId: string) => {
 
     const updateFilters = () => {
       cards.forEach((card: Element) => {
-        const cardCategory = card.getAttribute('data-category');
+        const cardCategory = card.getAttribute('data-category') || "";
         const cardTags = card.getAttribute('data-tags') || "";
         
-        const matchCategory = !activeCategory || cardCategory === activeCategory;
+        // ▼ 修正: split(' ')で配列化し、includesで判定するロジック
+        const matchCategory = !activeCategory || cardCategory.split(' ').includes(activeCategory);
         const matchTag = !activeTag || cardTags.includes(activeTag);
         
         if (matchCategory && matchTag) {

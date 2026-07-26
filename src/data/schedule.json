@@ -175,7 +175,7 @@
       ]
     },
     {
-      "id": "event_zumba_wed_kannami",
+      "id": "event_wed_kannami",
       "category": "event",
       "schedule_type": "イベント",
       "area": "函南",
@@ -189,15 +189,15 @@
       ]
     },
     {
-      "id": "event_sdance_sun_numazu",
+      "id": "event_sun_numazu",
       "category": "event",
       "schedule_type": "イベント",
       "area": "沼津",
       "program": "S-DANCE",
-      "title": "（沼津市民限定）おやつつき！夏休み親子運動教室",
+      "title": "[KIDS]（沼津市民限定）おやつつき！夏休み親子運動教室",
       "sponsor": "沼津市主催",
       "location": "",
-      "fee": "参加費：無料（おやつつき）締め切り：7月20日 詳細：ズンともHP",
+      "fee": "参加費：無料（おやつつき）締め切り：7月20日 詳細：ズンともHP（https://zuntomo.com/blog/2026/07/numazu-summer-kids/）",
       "url": "https://zuntomo.com/blog/2026/07/numazu-summer-kids/",
       "schedules": [
         { "date": "2026-08-09", "time": "9時30分〜11時40分", "room": "ゆるっとエンジョイ！ダンス・ダンス・ダンス" },
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "id": "event_zumba_sun_susono",
+      "id": "event_sun_susono",
       "category": "event",
       "schedule_type": "イベント",
       "area": "裾野",
