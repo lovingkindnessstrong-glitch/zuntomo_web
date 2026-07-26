@@ -3,7 +3,7 @@ layout: ../../../../../layouts/BlogPostLayout.astro
 title: 【函南町】保護犬・猫チャリティZUMBA🐶😺を開催します
 description: （JWI承認No.39373）7月29日（水）多頭崩壊や飼育困難などで保護された「保護犬・保護猫」達のためのチャリティZUMBAを開催します。
 date: 2026-07-26
-tags: ["函南", "ZUMBA", "イベント", "チャリティ", "保護猫", "保護犬", "フェアリーハウス", "お知らせ", "news"]
+tags: ["函南", "ZUMBA", "イベント", "お知らせ", "news"]
 heroImage: "/assets/blog/2026/07/kannami-protection-dogs-cats-zumba-hero2.webp"
 ---
 
