@@ -16,8 +16,14 @@ const {
   image = "/assets/images/common/default-ogp.webp" // デフォルトのOGP画像
 } = Astro.props;
 
+// サイトのベースURL（Astro.site が設定されていない場合の安全策として Astro.url をフォールバック）
+const siteUrl = Astro.site || Astro.url;
+
 // 現在のページの絶対URLを生成（Canonical・OGP用）
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+
+// OGP画像の絶対URLを生成（.href で確実に文字列化）
+const ogImageURL = new URL(image, siteUrl).href;
 ---
 
 <html lang="ja">
@@ -29,12 +35,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- OGP基本設定 -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={ogImageURL} />
+    
+    <!-- Twitter（X）カード設定 -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />

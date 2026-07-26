@@ -4,8 +4,10 @@
 // プロジェクトの共通レイアウトを読み込む（※パスやファイル名は実際の環境に合わせてください）
 import Layout from '../layouts/Layout.astro'; 
 import Schedule from '../components/Schedule.astro';
+// ▼ ここでスケジュールページ用のOGP画像パスを指定
+const pageOgImage = "/assets/images/schedule-ogp.webp"; // ※実際の画像パスに書き換えてください
 ---
-
-<Layout title="今月のスケジュール | ズンとも">
+{/* ▼ Layoutに image プロパティを渡す */}
+<Layout title="今月の予定 | ズンとも" description="ズンともの最新レッスンスケジュールです。" image={pageOgImage}>
   <Schedule />
 </Layout>
