@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const labEntries = await getCollection('lab');
+  return labEntries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.event_name} - 香盤表 | ズンとも`}>
+  <main class="container mx-auto px-4 py-8 max-w-3xl">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-800 leading-snug">{entry.data.event_name}</h1>
+      <p class="text-lg font-medium text-blue-600 mt-1">{entry.data.program_name}</p>
+    </div>
+
+    {/* イベント概要パネル */}
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-8 text-sm text-gray-700 shadow-sm">
+      <h2 class="font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">イベント概要</h2>
+      <ul class="space-y-2 mb-4">
+        <li><span class="font-semibold w-24 inline-block">出演日時:</span> {entry.data.performance_date} {entry.data.performance_time}</li>
+        <li><span class="font-semibold w-24 inline-block">集合日時:</span> {entry.data.assembly_time}</li>
+        <li><span class="font-semibold w-24 inline-block">集合場所:</span> {entry.data.assembly_place}</li>
+        <li><span class="font-semibold w-24 inline-block">会場:</span> {entry.data.venue}</li>
+        <li><span class="font-semibold w-24 inline-block">住所:</span> {entry.data.address}</li>
+      </ul>
+      <div class="mb-4">
+        <span class="font-semibold block mb-1">ドレスコード:</span>
+        <p class="leading-relaxed">{entry.data.dress_code}</p>
+      </div>
+      <div class="w-full rounded overflow-hidden" set:html={entry.data.map_iframe}></div>
+    </div>
+
+    {/* 香盤表（セットリスト） */}
+    <h2 class="text-xl font-bold text-gray-800 mb-4 border-b-2 border-blue-600 pb-2">香盤表・動画リスト</h2>
+    <ul class="space-y-4 mb-10">
+      {entry.data.setlist.map(item => (
+        <li class="flex flex-col sm:flex-row gap-4 border border-gray-200 p-4 rounded-xl bg-white shadow-sm">
+          <a href={`https://youtu.be/${item.youtube_id}`} target="_blank" rel="noopener noreferrer" class="flex-shrink-0 w-full sm:w-40 relative group block">
+            <img 
+              src={`https://img.youtube.com/vi/${item.youtube_id}/mqdefault.jpg`} 
+              alt={item.title} 
+              class="w-full h-auto rounded-lg shadow-sm border border-gray-100 object-cover aspect-video group-hover:opacity-90 transition"
+            />
+            {/* 再生ボタン風アイコン（CSS） */}
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 rounded-full w-10 h-10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
+              </div>
+            </div>
+          </a>
+          
+          <div class="flex-1">
+            <h3 class="font-bold text-gray-800 text-lg leading-tight mb-2">
+              <span class="text-blue-600 mr-1">{item.order}.</span>{item.title}
+            </h3>
+            <div class="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1 mb-2">
+              <span class="bg-gray-100 px-2 py-0.5 rounded"><span class="font-semibold">開始:</span> {item.start_type}</span>
+              <span class="bg-gray-100 px-2 py-0.5 rounded"><span class="font-semibold">足:</span> {item.start_foot}</span>
+            </div>
+            
+            {item.performers && (
+              <div class="text-sm text-gray-800 mb-2 font-medium">
+                <span class="text-blue-600 mr-1">👥 出演:</span>{item.performers}
+              </div>
+            )}
+
+            {item.notes && (
+              <p class="text-sm text-gray-700 bg-blue-50/50 p-2 rounded border border-blue-100 mt-2">
+                {item.notes}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    {/* Markdown本文（共通注意事項など） */}
+    <div class="prose prose-sm sm:prose-base max-w-none prose-blue">
+      <Content />
+    </div>
+  </main>
+</Layout>

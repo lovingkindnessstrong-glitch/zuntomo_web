@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const labEntries = await getCollection('lab');
+labEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="S-Dance Lab（自習用香盤表） | ズンとも">
+  <main class="container mx-auto px-4 py-8 max-w-3xl">
+    <div class="mb-8 border-b pb-4">
+      <h1 class="text-3xl font-bold text-gray-800">イベント香盤表・自習リスト</h1>
+      <p class="text-gray-600 mt-2">各イベントの出演情報と、セットリストの確認用ページです。</p>
+    </div>
+
+    <ul class="divide-y divide-gray-200 border-t border-b border-gray-200">
+      {labEntries.map(entry => (
+        <li>
+          <a href={`/lab/${entry.id}`} class="block hover:bg-gray-50 p-4 transition">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-medium text-blue-600">{entry.data.performance_date} 出演</span>
+              <h2 class="text-xl font-bold text-gray-800">{entry.data.event_name}</h2>
+              <span class="text-sm text-gray-500">{entry.data.venue}</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
