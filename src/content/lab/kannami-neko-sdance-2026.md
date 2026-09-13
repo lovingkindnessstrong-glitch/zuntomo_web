@@ -1,4 +1,11 @@
 ---
+# =========================================================
+# 【USAGE】複数ステージがある場合
+# ・ファイルはステージごとに分ける（例: stage1.md, stage2.md）
+# ・一覧画面で1つのカードにまとめる（名寄せする）ため、
+#  `event_name` の文字列は各ファイルで「完全一致」させること
+# =========================================================
+
 event_name: "第37回（2026）かんなみ猫おどり"
 venue: "伊豆ゲートウェイ函南・メインステージ"
 address: "函南町塚本887-1"
@@ -16,30 +23,30 @@ setlist:
     youtube_id: "-m4ewWJzBYQ"
     start_type: "板付き"
     start_foot: "右スタート"
-    performers: "全員"
+    performers: "大人7人＋KIDS全員"
     notes: "フォーメーション解説等はこちらへ"
   - order: 2
     title: "好きすぎて滅short+爆裂愛してるshort"
-    youtube_id: "jzEtHhAY3us"
+    youtube_id: "pb0Ph3yM_G0"
     start_type: "板付き"
     start_foot: "右スタート"
-    performers: "KIDS"
+    performers: "大人7人＋KIDS全員"
     notes: "フォーメーション解説等はこちらへ"
   - order: 3
     title: "ほんまやで☆なんでやねん☆しらんけど"
     youtube_id: "GFcKNnUa8o8"
     start_type: "板付き"
     start_foot: "右スタート"
-    performers: "大人"
+    performers: "大人7人"
     notes: "フォーメーション解説等はこちらへ"
   - order: 4
     title: "GOLDEN"
     youtube_id: "4FdKIlC284w"
     start_type: "板付き"
     start_foot: "右スタート"
-    performers: "KIDS→ラスト全員"
+    performers: "KIDS→ラストは全員で。"
     notes: "フォーメーション解説等はこちらへ"
 ---
 
 ## MEMO
-* ここにMarkdown形式で、出演者全員に向けたテキストや動線メモを自由に記述できます。
+* ステージに全員乗れないので、大人はGOLDEN以外の3曲は各7名ずづステージに上がります。7名の振り分けは事前に決めてください。GOLDENのラストで全員舞台に上がり、カーテンコールで終了です。
