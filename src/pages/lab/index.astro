@@ -2,17 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-
-
 const labEntries = await getCollection('lab');
-// 1. event_nameをキーにして名寄せ（グループ化）
+
 // =========================================================
 // 【USAGE】複数ステージの名寄せ（グループ化）機能
 // 1イベントで複数ステージがある場合、Markdownファイルはステージごとに分割する。
 // 各ファイルのフロントマターで `event_name` の文字列を「完全一致」させると、
 // 以下の処理で自動的に1つのイベントカード内にまとまって表示される。
 // =========================================================
-
 const groupedEvents = labEntries.reduce((acc, entry) => {
   const eventName = entry.data.event_name;
   if (!acc[eventName]) {
@@ -22,7 +19,7 @@ const groupedEvents = labEntries.reduce((acc, entry) => {
   return acc;
 }, {} as Record<string, any[]>);
 
-// 2. 扱いやすいように配列に変換し、ソートをかける
+// 扱いやすいように配列に変換し、ソートをかける
 const groupedEventsArray = Object.entries(groupedEvents).map(([eventName, entries]) => {
   // グループ内の各ステージを時間順にソート（performance_date + performance_time）
   const sortedEntries = entries.sort((a, b) => {
@@ -34,55 +31,64 @@ const groupedEventsArray = Object.entries(groupedEvents).map(([eventName, entrie
   return {
     eventName,
     entries: sortedEntries,
-    // グループ全体の代表日時（イベント自体を最新順に並べるため）
     mainDate: sortedEntries[0].data.date.valueOf()
   };
 }).sort((a, b) => b.mainDate - a.mainDate);
 ---
 
-<Layout title="S-Dance Lab（イベント動画） | ズンとも">
+<Layout title="S-Dance Lab（自習用香盤表） | ズンとも">
   <main class="container mx-auto px-4 py-8 max-w-3xl">
     <div class="mb-8 border-b pb-4">
-      <h1 class="text-3xl font-bold text-gray-800">😺ズンともイベント動画倉庫📹</h1>
-      <p class="text-gray-600 mt-2">イベントの動画と本番概要です。出演者は必ず目を通してください。</p>
+      <h1 class="text-3xl font-bold text-gray-800">S-Dance Lab😺ズンともイベント練習用動画😺
+</h1>
+      <p class="text-gray-600 mt-2">練習用の動画と、本番注意事項です。出演者は必ず目を通してください。</p>
     </div>
 
-    {/* 名寄せした配列を展開 */}
-    <div class="space-y-8">
-      {groupedEventsArray.map(group => (
-        <div class="border border-gray-200 rounded-xl bg-white overflow-hidden shadow-sm">
+    {/* 名寄せした配列を展開（アコーディオン版） */}
+    <div class="space-y-6">
+      {groupedEventsArray.map((group, index) => (
+        <details class="group border border-gray-200 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden" open={index === 0}>
           
-          {/* イベントのヘッダー（1つにまとまる） */}
-          <div class="bg-gray-50 border-b border-gray-200 px-5 py-4 text-gray-800">
+          {/* アコーディオンのヘッダー部分 */}
+          <summary class="flex justify-between items-center bg-gray-50 px-5 py-4 text-gray-800 cursor-pointer hover:bg-gray-100 transition rounded-t-xl group-open:border-b group-open:border-gray-200">
             <h2 class="text-xl font-bold">{group.eventName}</h2>
-          </div>
+            {/* 開閉アイコン（開くと180度回転） */}
+            <span class="text-gray-500 transition-transform duration-300 group-open:rotate-180">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </summary>
           
-          {/* ステージ（公演）ごとのリスト */}
-          <ul class="divide-y divide-gray-100">
-            {group.entries.map(entry => (
-              <li>
-                <a href={`/lab/${entry.id}`} class="block hover:bg-blue-50/50 p-5 transition group">
-                  <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                    <div class="flex flex-col gap-1">
-                      {/* program_nameに「16:00〜 ズンともS-Dance」等を入れると綺麗です */}
-                      <span class="text-blue-600 font-bold text-lg group-hover:underline">
-                        {entry.data.program_name}
-                      </span>
-                      <div class="text-sm text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
-                        <span>📅 {entry.data.performance_date} {entry.data.performance_time}</span>
-                        <span>📍 {entry.data.venue}</span>
+          {/* アコーディオンの中身（ステージごとのリスト） */}
+          <div class="overflow-hidden">
+            <ul class="divide-y divide-gray-100">
+              {group.entries.map(entry => (
+                <li>
+                  <a href={`/lab/${entry.id}`} class="block hover:bg-blue-50/50 p-5 transition group/link">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                      <div class="flex flex-col gap-1">
+                        <span class="text-blue-600 font-bold text-lg group-hover/link:underline">
+                          {entry.data.program_name}
+                        </span>
+                        <div class="text-sm text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
+                          <span>📅 {entry.data.performance_date} {entry.data.performance_time}</span>
+                          <span>📍 {entry.data.venue}</span>
+                        </div>
+                      </div>
+                      <div class="text-gray-400 hidden md:block">
+                        <svg class="w-5 h-5 group-hover/link:text-blue-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
                       </div>
                     </div>
-                    {/* 矢印アイコン */}
-                    <div class="text-gray-400 hidden md:block">
-                      <svg class="w-5 h-5 group-hover:text-blue-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+        </details>
       ))}
     </div>
   </main>

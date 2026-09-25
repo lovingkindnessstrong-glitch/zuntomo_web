@@ -4,25 +4,38 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import tagsDict from '../../../data/tags.json';
 
 export async function getStaticPaths() {
-  // Astro.glob(...) の行を以下に差し替え
-const allPosts = Object.values(import.meta.glob('../../**/*.md', { eager: true })) as any[];
+  const allPosts = Object.values(import.meta.glob('../../**/*.md', { eager: true })) as any[];
   
-  // 💡 結果を as string[] と明示して格納します
-  const uniqueTags = [...new Set(allPosts.flatMap((post: any) => post.frontmatter.tags || []))] as string[];
+  // URL（slug）をキーにして記事をまとめるMap
+  const tagGroups = new Map<string, { tagName: string, posts: any[] }>();
 
-  return uniqueTags.map((tag: string) => {
-    const dictData = (tagsDict as any)[tag];
-    const slug = dictData ? dictData.slug : encodeURIComponent(tag);
+  allPosts.forEach((post: any) => {
+    const tags = post.frontmatter.tags || [];
+    
+    tags.forEach((tag: string) => {
+      const dictData = (tagsDict as any)[tag];
+      // URL用のslugを決定（これが一意のキーになります）
+      const slug = dictData ? dictData.slug : encodeURIComponent(tag);
+      
+      if (!tagGroups.has(slug)) {
+        tagGroups.set(slug, {
+          // 画面表示用のタグ名（辞書に表示用の名前があれば優先、なければ元のタグ名）
+          tagName: dictData?.name || tag,
+          posts: []
+        });
+      }
+      
+      tagGroups.get(slug)!.posts.push(post);
+    });
+  });
 
-    const filteredPosts = allPosts.filter((post: any) => 
-      (post.frontmatter.tags || []).includes(tag)
-    );
-
+  // MapからAstroが求める配列フォーマットに変換
+  return Array.from(tagGroups.entries()).map(([slug, data]) => {
     return {
       params: { tag: slug },
       props: { 
-        tagName: tag,
-        posts: filteredPosts 
+        tagName: data.tagName,
+        posts: data.posts 
       }
     };
   });

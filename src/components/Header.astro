@@ -1,5 +1,42 @@
 ---
 import logoImage from '../assets/images/common/logo.svg';
+// 💡 JSONデータをインポート（パスは実際の構成に合わせて調整してください）
+import scheduleData from '../data/schedule.json';
+import { getCollection } from 'astro:content';
+
+// ==========================================
+// 💡 更新バッジ（NEWマーク）の判定ロジック
+// ==========================================
+const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+const now = new Date().valueOf();
+
+// ① スケジュールの判定
+const parsedScheduleDate = scheduleData.last_updated.replace(/年|月/g, '/').replace('日', '');
+const isScheduleUpdated = (now - new Date(parsedScheduleDate).valueOf()) < SEVEN_DAYS;
+
+// ② BLOGの判定（getCollection ではなく glob を使用）
+const allBlogs = Object.values(import.meta.glob('../pages/blog/**/*.md', { eager: true })) as any[];
+const latestBlog = allBlogs.sort((a, b) => {
+  const dateA = a.frontmatter?.date ? new Date(a.frontmatter.date).valueOf() : 0;
+  const dateB = b.frontmatter?.date ? new Date(b.frontmatter.date).valueOf() : 0;
+  return dateB - dateA;
+})[0];
+const isBlogUpdated = latestBlog?.frontmatter?.date 
+  ? (now - new Date(latestBlog.frontmatter.date).valueOf()) < SEVEN_DAYS 
+  : false;
+
+// ③ LABの判定（こちらは Content Collections）
+let isLabUpdated = false;
+try {
+  const allLabs = await getCollection('lab');
+  const latestLab = allLabs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+  if (latestLab) {
+    isLabUpdated = (now - new Date(latestLab.data.date).valueOf()) < SEVEN_DAYS;
+  }
+} catch (error) {
+  // まだ記事がない場合のエラーを回避
+}
+// ==========================================
 
 const navLinks = [
   { href: '/', label: 'HOME' },
@@ -16,24 +53,17 @@ const navLinks = [
       { href: '/activities/neko-odori/', label: '猫おどり部' },
     ],
   },
-  { href: '/blog/', label: 'BLOG' },
+  { href: '/blog/', label: 'BLOG', isUpdated: isBlogUpdated },
+  { href: '/lab/', label: 'LAB', isUpdated: isLabUpdated },
 ];
 
-// LINEのURLを変数として管理
 const LINE_URL = 'https://lin.ee/8Rjc7Jd';
-
-// 💡 現在のURLパスを取得
 const currentPath = Astro.url.pathname;
 
-// 💡 カレント判定ロジック
-// (hrefが現在のパスと一致するか、または下層ページを見ているかを判定)
 const isCurrent = (href: string, children?: {href: string, label: string}[]) => {
   if (href === '/') return currentPath === '/';
   if (href.startsWith('/#')) {
-    if (children) {
-      // 下層ページ（/activities/...）にいる場合は親メニューをカレントにする
-      return children.some(child => currentPath.startsWith(child.href));
-    }
+    if (children) return children.some(child => currentPath.startsWith(child.href));
     return currentPath === '/';
   }
   return currentPath.startsWith(href);
@@ -41,18 +71,17 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 shadow-sm">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-1 md:px-6">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-3 py-1 md:px-6">
     
     {/* ロゴ部分 */}
-    <a href="/" class="flex items-center transition-opacity hover:opacity-80" aria-label="ズンともホーム">
-      <img src={logoImage.src} alt="沼津・三島のダンスサークル ズンとも" class="h-16 md:h-20 w-auto" />
+    <a href="/" class="flex shrink-0 items-center transition-opacity hover:opacity-80 pr-2" aria-label="ズンともホーム">
+      <img src={logoImage.src} alt="沼津・三島のダンスサークル ズンとも" class="h-14 md:h-20 w-auto" />
     </a>
 
+    {/* PC版 グローバルナビゲーション */}
     <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary navigation">
       {navLinks.map((link) => {
-        // 💡 カレント状態を取得
         const isActive = isCurrent(link.href, link.children);
-        
         return link.children ? (
           <div class="relative group py-4">
             <a href={link.href} class={`text-sm font-bold transition flex items-center gap-1 ${isActive ? 'text-emerald-600' : 'text-slate-700 hover:text-slate-900'}`}>
@@ -73,27 +102,53 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
             </div>
           </div>
         ) : (
-          <a href={link.href} class={`text-sm font-bold transition py-4 ${isActive ? 'text-emerald-600' : 'text-slate-700 hover:text-slate-900'}`}>
+          <a href={link.href} class={`relative text-sm font-bold transition py-4 ${isActive ? 'text-emerald-600' : 'text-slate-700 hover:text-slate-900'}`}>
             {link.label}
+            {/* 更新バッジ（PC用） */}
+            {link.isUpdated && (
+              <span class="absolute top-3 -right-2 flex h-2 w-2 rounded-full bg-red-500"></span>
+            )}
           </a>
         );
       })}
     </nav>
 
-      <!-- 案2：サブボタン風スタイル -->
-        <a href="/schedule" class="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    {/* 右側アクションエリア（スマホ用ショートカット含む） */}
+    <div class="flex items-center gap-2 sm:gap-3">
+      
+      {/* 💡 スマホ専用ショートカット（BLOG / LAB）※ハンバーガーから外に出しました */}
+      <div class="flex items-center gap-3 md:hidden">
+        <a href="/blog" class="relative text-[11px] font-bold text-slate-600 hover:text-emerald-600 transition">
+          BLOG
+          {isBlogUpdated && <span class="absolute -top-1 -right-1.5 h-1.5 w-1.5 rounded-full bg-red-500"></span>}
+        </a>
+        <a href="/lab" class="relative text-[11px] font-bold text-slate-600 hover:text-emerald-600 transition">
+          LAB
+          {isLabUpdated && <span class="absolute -top-1 -right-1.5 h-1.5 w-1.5 rounded-full bg-red-500"></span>}
+        </a>
+      </div>
+
+      <!-- スケジュールボタン（NEWバッジ付き） -->
+      <a href="/schedule" class="relative flex items-center gap-1 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-bold transition-colors">
+        {/* スケジュールのバッジは少し目立たせる（波紋エフェクト） */}
+        {isScheduleUpdated && (
+          <span class="absolute -top-1 -right-1 flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          </span>
+        )}
+        <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-          </svg>
-        <span class="text-xs sm:text-sm">今月の予定</span>
+        </svg>
+        <span class="text-[11px] sm:text-sm">予定</span>
       </a>
       
-      {/* PC版 LINEボタン */}
+      {/* PC版・スマホ共通 LINEアイコンボタン（スマホではアイコンのみで省スペース化） */}
       <a
         href={LINE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center justify-center rounded-full bg-[#06C755] px-3 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 md:px-5"
+        class="inline-flex items-center justify-center rounded-full bg-[#06C755] p-1.5 md:px-5 md:py-2 text-sm font-semibold text-white transition hover:bg-emerald-500"
       >
         <svg class="h-5 w-5 md:hidden" viewBox="0 0 24 24" fill="currentColor" aria-label="LINE申込">
           <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
@@ -107,9 +162,8 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
         type="button"
         aria-label="メニューを開閉"
         aria-expanded="false"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 md:hidden"
+        class="inline-flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 md:hidden"
       >
-        <span class="sr-only">メニュー</span>
         <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
@@ -122,7 +176,6 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
     <div class="flex flex-col gap-2 pt-3">
       {navLinks.map((link) => {
         const isActive = isCurrent(link.href, link.children);
-        
         return link.children ? (
           <div>
             <a href={link.href} class={`block rounded-2xl px-4 py-3 text-sm font-bold transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-800 hover:bg-slate-100'}`}>
@@ -140,21 +193,12 @@ const isCurrent = (href: string, children?: {href: string, label: string}[]) => 
             </div>
           </div>
         ) : (
-          <a href={link.href} class={`block rounded-2xl px-4 py-3 text-sm font-bold transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-100'}`}>
+          <a href={link.href} class={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold transition ${isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-100'}`}>
             {link.label}
+            {link.isUpdated && <span class="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full">NEW</span>}
           </a>
         );
       })}
-      
-      {/* スマホ版 LINEボタン */}
-      <a
-        href={LINE_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-[#06C755] px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
-      >
-        LINE申込
-      </a>
     </div>
   </nav>
 
