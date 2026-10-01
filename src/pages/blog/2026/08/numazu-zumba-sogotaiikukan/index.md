@@ -1,15 +1,14 @@
 ---
 layout: ../../../../../layouts/BlogPostLayout.astro
-title: 【沼津市】香陵ZUMBA PARTY HALLOWEEN BASH🐟【残席わずか】
+title: 【沼津市】香陵ZUMBA PARTY HALLOWEEN BASH🐟【満員御礼】
 description: 10月31日（土）16:00〜17:30 沼津市総合体育館にて、体育館所属のZUMBAインストラクター全員によるハロウィンZUMBAイベントを開催します！AI先生、木村アユコ先生、AKINA先生とSUZUの4人で初コラボです👻(自主開催です。JWI承認番号39590)
 date: 2026-08-30
 tags: ["沼津", "ZUMBA", "イベント", "お知らせ", "news"]
 heroImage: "/assets/blog/2026/08/numazu-zumba-sogotaiikukan-halloween2026-hero-640.webp"
 ---
 
-**【定員間近】香陵ZUMBA PARTY HALLOWEEN BASH🐟開催のお知らせ**
+**【満員御礼】香陵ZUMBA PARTY HALLOWEEN BASH🐟開催のお知らせ**
 AI、AYUKO、AKINA、SUZUによるZUMBA PARTY!!
-
 こんにちは！ズンともです😊
 とってもスペシャルなお知らせです！
 
@@ -17,7 +16,7 @@ AI、AYUKO、AKINA、SUZUによるZUMBA PARTY!!
 沼津市総合体育館「香陵アリーナフィットネスレッスン」を担当している4人のZUMBAインストラクター全員によるスペシャルなZUMBAイベントを企画しました！（JWI承認番号39590）
 
 > **※本イベントはインストラクターによる自主開催です。沼津市総合体育館さまへの直接のお申し込み、お問い合わせはご遠慮ください。**
-> お問い合わせ・お申し込みは、私【SUZU(影島鈴花) mail:newhope2996@gmail.com】もしくは各インストラクターまで🎃一番下にInstagramリンクあります
+> お問い合わせ・お申し込みは、私【SUZU(影島鈴花) mail:newhope2996@gmail.com】もしくは各インストラクターまで🎃一番下にInstagramリンクあります（現在キャンセル待ちです）
 
 時間は16時00分〜17時30分の1時間半、場所は沼津市総合体育館（香陵アリーナ）【武道場C】です。
 
