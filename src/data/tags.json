@@ -6,6 +6,7 @@
   "函南": { "slug": "kannami", "category": "area" }, 
   "長泉": { "slug": "nagaizumi", "category": "area" },
   "清水町": { "slug": "shimizu-cho", "category": "area" },
+  "伊豆の国": { "slug": "izunokuni", "category": "area" },
 
   "S-DANCE": { "slug": "sdance", "category": "class" },
   "ZUMBA": { "slug": "zumba", "category": "class" }, 
